@@ -14,12 +14,20 @@ npm run start:server
 
 ### Fucking BDC how does it work ?
 
-In assets/bdc-config.json set boardId and stuff that's needed
+#### Setup page
+- Click 'Setup' button
+- Follow link to generate trello key
+- Copy-paste trello key
+- Choose a board (from select, or copypaste trello board id)
+- Press OK
+- Drag and drop lists in corresponding slots (dont miss any)
+- Choose start and end date and save 'em
+- Check at the beginning of the page if everything looks ok, and SAVE
 
-In app, changes are stored in local storage, to persist, copy and paste conf
-`(click "view conf" button you fool)`
+Go to burndown page : yolo
 
-
+#### If there are issues or weird stuff
+Clear local storage, start again
 
 ### Tests lol
 
