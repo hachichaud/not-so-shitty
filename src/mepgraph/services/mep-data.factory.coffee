@@ -1,7 +1,7 @@
 angular.module '%module%.mepgraph'
 .factory 'MepData', ($http) ->
   getData = ->
-    $http.get '/api/data/mep'
+    $http.get 'data-mep.json'
     .then (res) ->
       res.data
     .catch (err) ->

@@ -1,7 +1,21 @@
-md-button.md-primary.md-raised.md-accent(
-  ui-sref="setup.trello"
-) SETUP
+md-content.md-padding(
+  layout="column"
+  layout-align="center center"
+  layout-fill
+)
+  .lol(
+    flex="50"
+  )
+    md-button.md-primary.md-raised.md-accent(
+      ui-sref="setup.trello"
+    ) SETUP
 
-md-button.md-primary.md-raised.md-accent(
-ui-sref="burndown"
-) BOARD
+    md-button.md-primary.md-raised.md-accent(
+      ui-sref="burndown"
+    ) BOARD
+
+    md-button.md-primary.md-raised.md-accent(
+      ui-sref="home.mepgraph"
+    ) MEPGRAPH(wip)
+
+md-content.md-padding(ui-view)
