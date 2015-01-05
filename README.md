@@ -1,5 +1,7 @@
 # Not so shitty
 
+[The law of shitty dashboards](http://attackwithnumbers.com/the-laws-of-shitty-dashboard)
+
 ### Build
 
 ```bash
