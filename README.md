@@ -5,10 +5,8 @@
 ```bash
 # Install npm + bower dependencies and then build
 npm install
-# Launch the watcher & servers
-npm run start:all
-# Lauch servers only
-npm run start:server
+# Launch the watcher & livereload
+npm start
 # http://localhost:8000
 ```
 
