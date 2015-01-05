@@ -1,0 +1,19 @@
+.main-view {
+  .not-so-shitty-page[role="tabpanel"] {
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    position: absolute;
+
+    &.ng-leave.ng-leave-active, &.ng-enter {
+      left: -100%;
+    }
+    &.ng-leave, &.ng-enter.ng-enter-active {
+      left: 0;
+    }
+    &.ng-leave {
+      z-index: 100;
+    }
+  }
+}

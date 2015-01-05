@@ -1,0 +1,21 @@
+doctype html
+html(lang="en", ng-app="%module%")
+  head
+    title Not So Shitty
+    meta(charset="utf-8")
+    link(rel="icon", type="image/x-icon", href="/favicon.ico")
+    link(rel="stylesheet", href="%styles%/vendor.css")
+    link(rel="stylesheet", href="%styles%/app.css")
+  body(
+    layout="horizontal"
+    md-theme="blue-grey"
+  )
+    //- base(href="/")
+    .main-view(
+      layout-fill
+      ui-view
+    )
+
+    script(src="%scripts%/vendor.js")
+    script(src="%scripts%/app.js")
+    script(src="%scripts%/templates.js")

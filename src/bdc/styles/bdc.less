@@ -1,0 +1,134 @@
+@bdcgraph-bg-color: #F3EDD3;
+@bdcgraph-fg-color: #19BEC0;
+@bdcgraph-fg-light-color: #20D6C7;
+@bdcgraph-standard-color: #D54F58;
+@bdcgraph-default-color: #113F59;
+@bdcgraph-warning-color: #FA6E69;
+@bdcgraph-success-color: #97D17A;
+
+.bdc-conf {
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+bdc-member-avatar {
+
+  img.member-avatar {
+    border-radius: 2px;
+    margin-right: 5px;
+  }
+}
+bdc-add-member {
+  .md-button {
+    margin: auto 10px auto 5px;
+  }
+}
+bdc-sprint-speed {
+  .value {
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .total-resources {
+  }
+  .sprint-points {
+    label {
+    }
+    input {
+      width: 40px;
+      color: rgba(0, 0, 0, 0.729412);
+      border: none;
+      font-weight: bold;
+    }
+  }
+  .speed {}
+}
+
+#detail-button {
+  color: white;
+}
+.bdc {
+
+  > md-toolbar {
+    margin-bottom: 10px;
+  }
+
+  section {
+    background-color: #F7F7F7;
+  }
+  .bdc-detail {
+    .team-detail {
+      bdc-add-member {
+        margin-left: 10px;
+      }
+    }
+
+    .members-container {
+      // padding: 10px;
+    }
+
+  }
+
+}
+#bdcgraph svg {
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: rgba(0, 1, 0, 0.2);
+    color: rgba(0, 1, 0, 0.5);
+    shape-rendering: crispEdges;
+  }
+
+  .x .domain {
+    stroke: rgba(0,0,0,0);
+  }
+
+  rect {
+
+    &.background {
+      fill: @bdcgraph-bg-color;
+    }
+    &.ratio {
+      fill: @bdcgraph-fg-color;
+    }
+    &.standard-legend {
+      fill: @bdcgraph-standard-color;
+    }
+    &.jh-legend {
+      fill: @bdcgraph-bg-color;
+    }
+    &.jhmep-legend {
+      fill: @bdcgraph-fg-color;
+    }
+  }
+
+  text {
+    &.done-values {
+
+      &.good {
+        fill: @bdcgraph-success-color;
+      }
+      &.bad {
+        fill: @bdcgraph-warning-color;
+      }
+    }
+  }
+
+  path {
+    &.standard {
+      stroke: @bdcgraph-standard-color;
+      stroke-dasharray: 10 5;
+    }
+  }
+  .tick text, text {
+    fill: @bdcgraph-default-color;
+    &.standard-legend, &.jh-legend, &.jhmep-legend {
+      fill: @bdcgraph-default-color;
+    }
+  }
+
+}

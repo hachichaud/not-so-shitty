@@ -1,0 +1,19 @@
+div(
+  class="{{delay.delayClass}}"
+  layout-align="center center"
+  layout-fill
+  layout="row"
+)
+  .speed-diff(ng-if="delay.delayClass == 'bad'")
+    span.title Retard : 
+    span.value {{ delay.delay }}
+  .speed-diff(ng-if="delay.delayClass == 'good'")
+    span.title Avance : 
+    span.value {{  delay.delay }}
+  .speed
+    span.title Célérité : 
+    span.speed-variation(
+      class="{{delay.variation}}"
+    ) &nbsp;
+    //- span.title Célérité : 
+    //- span.value {{ delay.variation }}

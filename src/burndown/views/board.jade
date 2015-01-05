@@ -1,0 +1,33 @@
+.board(
+  layout="row"
+  layout-fill
+)
+  md-content.md-padding.resources-sprint(
+    layout
+    flex="40"
+  )
+    md-whiteframe.md-whiteframe-z1(
+      flex
+    )
+      md-content.md-padding
+        resources-widget(
+          settings="user"
+        )
+        sprint-points-widget(
+          settings="user"
+        )
+  md-content.md-padding.details-sprint(
+    flex="60"
+    layout
+  )
+    md-whiteframe.md-whiteframe-z1(
+      flex
+    )
+      .board-summary
+        board-summary
+
+      .sprint-summary
+        sprint-summary(graph-data="graphData")
+      
+      md-content.md-padding.team
+        team-widget(settings="user")

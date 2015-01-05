@@ -1,0 +1,60 @@
+.members-container(
+  layout="column"
+  layout-align="center left"
+)
+  .team-title Team
+  .team-container(
+    layout-fill
+    layout="row"
+  )
+    .team.dev-team(
+      flex
+      ui-on-drop="dropMember($event, $data, 'dev')"
+    )
+      trello-avatar(
+        ui-draggable="true"
+        ng-repeat="member in team.dev"
+        drag="{id: member, type: 'dev'}"
+        drop-validate="dropValidate($data, 'dev')"
+        drop-channel="teamChannel"
+        member-id="{{member}}"
+      )
+      .team-label DEV
+    
+    .team.other-team(
+      flex
+      ui-on-drop="dropMember($event, $data, 'other')"
+    )
+      trello-avatar(
+        ui-draggable="true"
+        ng-repeat="member in team.other"
+        drag="{id: member, type: 'other'}"
+        drop-channel="teamChannel"
+        drop-validate="dropValidate($data, 'other')"
+        member-id="{{member}}"
+      )
+    md-button.md-primary.ext-team-toggle(
+      aria-label="toggle add team"
+      ng-click="showAddable = !showAddable"
+    )
+      i.fa.fa-cog
+
+  .team-container(
+    layout-fill
+    layout="row"
+  )  
+    .team.ext-team(
+      ng-show="showAddable"
+      flex
+      ui-on-drop="dropMember($event, $data, 'ext')"
+    ) 
+      .ext-team-placeholder(ng-show="showPlaceHolder")
+        | Drag here to remove member
+      trello-avatar(
+        ui-draggable="true"
+        ng-repeat="member in team.ext"
+        drag="{id: member, type: 'ext'}"
+        drop-validate="dropValidate($data, 'ext')"
+        drop-channel="teamChannel"
+        member-id="{{member}}"
+      )

@@ -1,0 +1,22 @@
+md-content.md-padding(
+  md-theme="blue"
+  ng-show="showTrelloSetup"
+)
+  span Go to
+  a(
+    ng-href="{{requestTokenUrl}}"
+  )
+    |  request token from Trello
+    
+  span  and paste token : 
+  md-text-float.trello-token-input(
+    label="Trello token"
+    ng-model="user.trelloToken"
+  )
+  md-button.md-raised.md-primary(
+    ng-click="submitTrelloToken()"
+  ) OK
+.setup-trello-subview(
+  ui-view
+)
+  

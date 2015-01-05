@@ -1,0 +1,3 @@
+[submodule "test/features/step_definitions/cucumber-steps"]
+	path = test/features/step_definitions/cucumber-steps
+	url = git@github.com:atom-angular/cucumber-steps.git

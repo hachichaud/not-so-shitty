@@ -1,0 +1,29 @@
+resources-widget {
+  @widget-line-height: 30px;
+  @widget-day-label-width: 100px;
+  .members-container {
+    .empty-member {
+      font-weight: bold;
+      color: #888;
+      width: @widget-day-label-width;
+    }
+    trello-avatar {
+      width: @widget-day-label-width;
+      text-align: center;
+    }
+    height: @widget-line-height;
+  }
+  .resources-container {
+    .day-line {
+      height: @widget-line-height;
+      line-height: @widget-line-height;
+      .day-label {
+        width: @widget-day-label-width;
+      }
+      .day-resource {
+        width: @widget-line-height;
+        text-align: center;
+      }
+    }
+  }
+}

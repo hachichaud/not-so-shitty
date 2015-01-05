@@ -1,0 +1,30 @@
+[
+  {
+    "day": "Mercredi",
+    "left": 10,
+    "standard": 10,
+    "diff": 0
+  },
+  {
+    "day": "Jeudi",
+    "left": 8,
+    "standard": 9,
+    "diff": 1
+  },
+  {
+    "day": "Vendredi",
+    "left": 8,
+    "standard": 7,
+    "diff": -1
+  },
+  {
+    "day": "Lundi",
+    "left": 3,
+    "standard": 4,
+    "diff": 1
+  },
+  {
+    "day": "Mardi",
+    "standard": 0
+  }
+]

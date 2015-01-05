@@ -1,0 +1,19 @@
+h1 Burn Down Chart
+//- pre {{ dump | json }}
+md-toolbar
+  .md-toolbar-tools
+    h3 SCRUM BOOAOAOAOAARD
+    md-button(
+      ui-sref="burndown.board"
+    ) Go !
+md-content.md-padding
+  .scrum-board(
+    ui-view
+  )
+    
+
+md-toolbar
+  .md-toolbar-tools
+    h3 Burn Down 4 WAT ?
+md-content.md-padding
+  bdcgraph(data="graphData")

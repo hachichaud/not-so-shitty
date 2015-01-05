@@ -1,0 +1,25 @@
+angular.module '%module%.bdc'
+.config ($translateProvider) ->
+  $translateProvider.translations 'en',
+    BDC_TITLE: 'Burn Down Chart'
+    BDC_TEXT: 'Replace bdc-conf.json to save settings'
+    BDC_VIEW_CONF: 'View conf'
+    BACKLOG: 'Backlog'
+    SPRINTBACKLOG: 'Sprint Backlog'
+    PRODUCTBACKLOG: 'Product Backlog'
+    DOING: 'Doing'
+    BLOCKED: 'Blocked'
+    VALIDATE: 'To Validate'
+    DONE: 'Done'
+
+  $translateProvider.translations 'fr',
+    BDC_TITLE: 'Burn Down Chart'
+    BDC_TEXT: 'Replace bdc-conf.json to save settings'
+    BDC_VIEW_CONF: 'View conf'
+    BACKLOG: 'Backlog'
+    SPRINTBACKLOG: 'Sprint Backlog'
+    PRODUCTBACKLOG: 'Product Backlog'
+    DOING: 'Doing'
+    BLOCKED: 'Blocked'
+    VALIDATE: 'To Validate'
+    DONE: 'Done'

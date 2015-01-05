@@ -1,0 +1,36 @@
+md-content(
+  layout="column"
+  layout-fill
+)
+  .total-resources(
+    layout="row"
+    layout-align="center center"
+    flex
+  )
+    div Total Resources : 
+    div.value {{settings.totalJH}}
+  .sprint-points(
+    layout="row"
+    layout-align="center center"
+    flex
+  )   
+    label(for="sprint-points") Sprint Points :
+    input.value(
+      type="number"
+      id="sprint-points"
+      ng-model="settings.sprintPoints"
+      ng-change="changeSprintPoints()"
+    )
+  .speed(
+    layout-align="center center"
+    layout="row"
+    flex
+  )
+    label(for="sprint-speed") Speed :
+    input.value(
+      type="number"
+      id="sprint-speed"
+      ng-model="settings.speed"
+      step="0.1"
+      ng-change="changeSpeed()"
+    )

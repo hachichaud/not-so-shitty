@@ -1,0 +1,25 @@
+.widget-container(layout="column")
+  .members-container(
+    layout="row"
+    layout-align="center left"
+    layout-fill
+  )
+    .empty-member(flex) Resources
+    trello-avatar(
+      flex
+      ng-repeat="member in settings.team.dev"
+      member-id="{{member}}"
+    )
+  .resources-container(layout="column")
+    .day-line(
+      ng-repeat="(iday, day) in settings.sprintDays"
+      layout-align="center left"
+      layout="row"
+    )
+      .day-label(flex) {{day.label}}
+      .day-resource(
+        flex
+        ng-repeat="(imember, member) in settings.team.dev"
+        ng-click="changeRes(iday, imember)"
+      ) {{ settings.resources[iday][imember] }}
+        

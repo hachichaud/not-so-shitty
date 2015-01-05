@@ -1,0 +1,30 @@
+md-content(
+  layout="row"
+)
+  .available-lists-container(
+    flex="45"
+  )
+    .list-available(
+      ui-draggable="true"
+      drag="list"
+      ng-repeat="list in boardLists"
+    ) {{list.name}}
+
+  .arrow(
+    flex="10"
+    layout
+    layout-align="center center"
+  )
+    i.fa.fa-arrow-right.fa-3x
+      
+  .chosen-lists-container(
+    flex="45"
+  )
+    .list-drop-site(
+      ng-repeat="type in listTypes"
+      ui-on-drop="dropList($data, type)"
+    )
+      md-text-float(
+        label="{{ type | uppercase | translate }}"
+        ng-model="lists[type]"
+      )

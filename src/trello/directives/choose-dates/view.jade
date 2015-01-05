@@ -1,0 +1,31 @@
+md-content(
+  layout="row"
+)
+  .date-picker First day
+    input(
+      type="text"
+      pick-a-date="dates.start"
+      placeholder="Select Date"
+    )
+    | {{ dates.start }}
+
+  .date-picker Last day
+    input(
+      type="text"
+      pick-a-date="dates.end"
+      placeholder="Select Date"
+    )
+    | {{ dates.end }}
+    
+  md-button.md-raised.md-primary(
+    ng-click="ok()"
+    aria-label="ok"
+  )
+    i.fa.fa-refresh
+
+md-content(
+  layout
+  layout-fill
+)
+  p Formatted sprint days : 
+  pre {{ dates.days | json }}

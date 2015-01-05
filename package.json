@@ -1,0 +1,52 @@
+{
+  "name": "notsoshitty",
+  "version": "0.0.1",
+  "scripts": {
+    "postinstall": "bower install && gulp build",
+    "start": "gulp watch",
+    "start:all": "npm run start:server & gulp watch",
+    "start:server": "node_modules/.bin/coffee server.coffee & node_modules/.bin/coffee server/notsoshitty-server.coffee",
+    "test": "karma start test/karma-unit.coffee --single-run",
+    "test:unit": "karma start test/karma-unit.coffee",
+    "test:functional": "webdriver-manager update && protractor --require coffee-script/register test/protractor.conf.coffee",
+    "docs": "gulp docs"
+  },
+  "dependencies": {
+    "bower": "*",
+    "coffee-script": "*",
+    "express": "^4.10.4",
+    "gulp": "*",
+    "gulp-angular-templatecache": "*",
+    "gulp-coffee": "*",
+    "gulp-concat": "*",
+    "gulp-filter": "*",
+    "gulp-jade": "*",
+    "gulp-less": "*",
+    "gulp-plug": "*",
+    "gulp-plumber": "*",
+    "gulp-rename": "*",
+    "gulp-replace": "*",
+    "gulp-rimraf": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-webserver": "*",
+    "http-proxy": "^1.7.1",
+    "serve-static": "^1.7.1"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "cucumber": "*",
+    "dgeni": "*",
+    "dgeni-packages": "*",
+    "karma": "*",
+    "karma-cli": "*",
+    "karma-coffee-preprocessor": "*",
+    "karma-coverage": "*",
+    "karma-firefox-launcher": "*",
+    "karma-mocha": "*",
+    "karma-phantomjs-launcher": "*",
+    "karma-sinon-chai": "*",
+    "main-bower-files": "^2.1.0",
+    "protractor": "*",
+    "sinon": "*"
+  }
+}

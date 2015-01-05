@@ -1,0 +1,58 @@
+md-toolbar(md-theme="indigo")
+  .md-toolbar-tools
+    h3 BURN DOWN CHART SETUP
+md-content(
+  layout="row"
+  layout-fill
+)
+  trello-avatar(
+    member-id="{{user.memberId}}"
+    size="170"
+  )
+  .details
+    p User : @{{ user.username }}
+    .boards Choose board :
+      md-text-float(
+        label="BoardId"
+        ng-model="user.boardId"
+      )
+      select(
+        ng-options="board.id as board.name for board in myBoards"
+        ng-model="user.boardId"
+      )
+      md-button.md-raised.md-primary(
+        ng-click="submitBoardId()"
+      ) OK
+
+md-toolbar(md-theme="orange")
+  .md-toolbar-tools
+    h3 Lists
+    md-button(
+      ng-click="submitLists()"
+      aria-label="save lists"
+    )
+      i.fa.fa-2x.fa-save
+md-content(
+  layout="row"
+  layout-fill
+)
+  choose-lists(
+    lists="myLists"
+    board-id="{{user.boardId}}"
+  )
+
+md-toolbar(md-theme="deep-purple")
+  .md-toolbar-tools
+    h3 {{ 'SPRINT_DATES' | translate }}
+    md-button(
+      ng-click="submitDays()"
+      aria-label="save days"
+    )
+      i.fa.fa-2x.fa-save
+md-content.md-padding(
+  layout="row"
+  layout-fill
+)
+  choose-dates.md-padding(
+    dates="myDates"
+  )

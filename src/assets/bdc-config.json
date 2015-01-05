@@ -1,0 +1,88 @@
+{
+  "resources": [
+    [
+      0.5,
+      0,
+      0.5
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      1
+    ]
+  ],
+  "team": {
+    "whole": [],
+    "dev": [
+      "5370b5bb8e8b3de02708932a",
+      "5087dff7bba877566a004252",
+      "508e6e2ce9bfefbb64000068"
+    ]
+  },
+  "board": {
+    "idBoard": "emtBSelt",
+    "sprint": {
+      "sprintPoints": 40,
+      "backlog": "534503d5ca633c8d09500749",
+      "doing": "52de83539a4ce83458b3c1fe",
+      "validate": "52de838b74ab9bd939fd087b",
+      "done": "5489c8f66113ab6e1eb78ec1",
+      "blocked": "54379d69250f995d7fa48fa7",
+      "days": [
+        {
+          "label": "Thursday",
+          "date": "2014-12-11T01:00:00+01:00"
+        },
+        {
+          "label": "Friday",
+          "date": "2014-12-12T01:00:00+01:00"
+        },
+        {
+          "label": "Monday",
+          "date": "2014-12-15T01:00:00+01:00"
+        },
+        {
+          "label": "Tuesday",
+          "date": "2014-12-16T01:00:00+01:00"
+        },
+        {
+          "label": "Wednesday",
+          "date": "2014-12-17T01:00:00+01:00"
+        },
+        {
+          "label": "Thursday",
+          "date": "2014-12-18T01:00:00+01:00"
+        },
+        {
+          "label": "Friday",
+          "date": "2014-12-19T01:00:00+01:00"
+        }
+      ]
+    }
+  }
+}

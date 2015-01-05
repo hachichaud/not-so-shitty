@@ -1,0 +1,40 @@
+@avatar-size: 30px;
+@label-height: 20px;
+@drag-zone-size: 44px;
+team-widget {
+  .team-title {
+    color: #888;
+    font-weight: bold;
+  }
+  .team {
+    position: relative;
+    min-height: @drag-zone-size;
+    padding: (@drag-zone-size - @avatar-size)/2;
+
+    trello-avatar {
+      display: inline-block;
+      .member-avatar {
+        display: block;
+        border-radius: @avatar-size/2;
+      }
+    }
+  }
+
+  .dev-team {
+    @dev-color: #F7F7F7;
+    background-color: @dev-color;
+
+    .team-label {
+      text-transform: uppercase;
+      transform: rotate(-90deg);
+      -webkit-transform: rotate(-90deg);
+      position: absolute;
+      right: 0;
+      top: 14px;
+      font-size: 0.8em;
+      color: darken(@dev-color, 60%);
+      font-weight: bold;
+      z-index: 2;
+    }
+  }
+}

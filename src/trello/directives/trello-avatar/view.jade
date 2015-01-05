@@ -1,0 +1,10 @@
+img.member-avatar(
+  ng-if="avatarHash"
+  alt="{{ username }}"
+  ng-src="https://trello-avatars.s3.amazonaws.com/{{avatarHash}}/{{size}}.png"
+)
+.member-avatar.initials(
+  ng-if="!avatarHash"
+  style="width: {{size}}px; height: {{size}}px; line-height: {{size}}px;"
+) {{ initials }}
+  md-tooltip {{ username }}
