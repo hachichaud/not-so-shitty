@@ -1,6 +1,7 @@
 angular.module '%module%.bdc'
 .factory 'BdcGraph',
 (BdcData) ->
+  # todo remove
   generateBdcData = (boardConfig, resources, speed, doneList) ->
     return unless boardConfig
     standard = boardConfig.sprint.sprintPoints

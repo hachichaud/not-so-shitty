@@ -24,9 +24,12 @@ angular.module '%module%.bdc'
       return $rootScope.user.sprintPoints
     else return
 
-  getDoneBetweenDays = (doneCards, start, end, lastDay) ->
+  getDoneBetweenDays = (doneCards, start, end, lastDay, dayPlusOne) ->
     return unless end
-    return if moment(end.date).isAfter moment().subtract(1, 'days')
+    if dayPlusOne
+      return if moment(end.date).isAfter moment().add(1, 'days')
+    else
+      return if moment(end.date).isAfter moment()
     # console.log 'getDoneBetweenDays :', start, end
     if lastDay
       endDate = new Date()
@@ -44,47 +47,44 @@ angular.module '%module%.bdc'
     # console.log donePoints + ' between ' + start?.label + ' and ' + end.label
     donePoints
 
-  generateGraphData = (settings) ->
+  generateGraphData = (settings, dayPlusOne) ->
     return unless settings
     standard = settings.sprintPoints
     totalDone = 0
-    data = [
-      {
-        "day": "Start"
-        "standard": parseFloat(standard, 10)
-        "left": parseFloat(standard, 10)
-        "diff": 0
-      }
-    ]
+    data = []
+    # Fuck*** bdc, how does it work ?
     UserTrello.getDoneListCards settings.lists.done
     .then (doneCards) ->
-      # console.log 'doneCards', doneCards
-      previousDay = undefined
       for day, i in settings.sprintDays
-        dayResources = _.reduce settings.resources[i], (s, n) -> s + n
-        standard = standard - dayResources*settings.speed
-        totalDone += getDoneBetweenDays doneCards, previousDay, settings.sprintDays[i], (i >= settings.sprintDays.length - 1)
-        # console.log settings.sprintDays[i].label + ' : ' + totalDone
+        if i > 0
+          dayResources = _.reduce settings.resources[i - 1], (s, n) -> s + n
+          standard = standard - dayResources*settings.speed
+          totalDone += getDoneBetweenDays doneCards, previousDay, settings.sprintDays[i], ((i) >= settings.sprintDays.length - 1), dayPlusOne
+          diff = standard - (settings.sprintPoints - totalDone) unless isNaN(totalDone)
+          previousDay = settings.sprintDays[i]
+        else
+          standard = parseFloat(standard, 10)
+          left = parseFloat(standard, 10)
+          diff = 0
+          totalDone += 0
         data.push {
           "day": day.label
           "standard": standard
           "left": settings.sprintPoints - totalDone unless isNaN(totalDone)
-          "diff": standard - (settings.sprintPoints - totalDone) unless isNaN(totalDone)
+          "diff": diff
         }
-        previousDay = settings.sprintDays[i]
-
       data
 
-  updateButSprintSpeed = (settings) ->
+  updateButSprintSpeed = (settings, dayPlusOne) ->
     setSprintSpeed settings.totalJH, settings.speed, settings.sprintPoints
-    generateGraphData $rootScope.user
+    generateGraphData $rootScope.user, dayPlusOne
     .then (data) ->
       $rootScope.graphData = data
 
-  updateData = (settings) ->
+  updateData = (settings, dayPlusOne) ->
     sprintSpeed = Resources.calculateSprintSpeed $rootScope.user.resources, getSprintPoints()
     setSprintSpeed sprintSpeed.jh, sprintSpeed.speed, sprintSpeed.sprintPoints
-    generateGraphData $rootScope.user
+    generateGraphData $rootScope.user, dayPlusOne
     .then (data) ->
       $rootScope.graphData = data
 

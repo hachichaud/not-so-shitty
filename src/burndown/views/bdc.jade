@@ -15,5 +15,8 @@ md-content.md-padding
 md-toolbar
   .md-toolbar-tools
     h3 Burn Down 4 WAT ?
+    md-button(
+      ng-click="toggleDayPlusOne()"
+    ) Toggle D+1
 md-content.md-padding
   bdcgraph(data="graphData")
