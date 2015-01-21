@@ -55,6 +55,7 @@ angular.module '%module%.bdc'
     # Fuck*** bdc, how does it work ?
     $q.when UserTrello.getDoneListCards settings.lists.done
     .then (doneCards) ->
+      dayLabel = "Start"
       for day, i in settings.sprintDays
         if i > 0
           dayResources = _.reduce settings.resources[i - 1], (s, n) -> s + n
@@ -68,11 +69,24 @@ angular.module '%module%.bdc'
           diff = 0
           totalDone += 0
         data.push {
-          "day": day.label
+          "day": dayLabel
           "standard": standard
           "left": settings.sprintPoints - totalDone unless isNaN(totalDone)
           "diff": diff
         }
+        dayLabel = day.label
+      # Last day
+      dayResources = _.reduce settings.resources[settings.sprintDays.length - 1], (s, n) -> s + n
+      standard = standard - dayResources*settings.speed
+      totalDone += getDoneBetweenDays doneCards, previousDay, settings.sprintDays[settings.sprintDays.length - 1], true, dayPlusOne
+      diff = standard - (settings.sprintPoints - totalDone) unless isNaN(totalDone)
+      data.push {
+        "day": dayLabel
+        "standard": standard
+        "left": settings.sprintPoints - totalDone unless isNaN(totalDone)
+        "diff": diff
+      }
+      # console.log 'graph data ', data
       data
 
   updateButSprintSpeed = (settings, dayPlusOne) ->
