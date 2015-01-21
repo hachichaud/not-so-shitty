@@ -10,6 +10,10 @@ md-content.md-padding(
         ng-click="saveSettings()"
         aria-label="save all settings"
       ) save
+      md-button(
+        ui-sref="burndown.board"
+        aria-label="goto bdc"
+      ) To the BDC !
   md-whiteframe.md-whiteframe-z1
     md-content.md-padding
       pre Setup : {{ user | json }}

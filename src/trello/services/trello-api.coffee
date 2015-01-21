@@ -58,7 +58,26 @@ angular.module '%module%.trello'
     .then (res) ->
       res.data
 
+  writeDataToCard = (cardId, token, data) ->
+    return unless token?
+    url = apiUrl + '/cards/' + cardId + '/desc'
+    url += '?key=' + applicationKey
+    url += '&token=' + token
+    $http
+      url: apiUrl
+      method:"PUT"
+      headers:
+        # 'Authorization': 'Basic dGVzdDp0ZXN0',
+        # 'Access-Control-Allow-Origin': '*'
+        'Content-Type': undefined#'text/html'
+      data:
+        value: JSON.stringify data
 
+    # $http.put url, value: JSON.stringify data
+    # .then (res) ->
+    #   res.data
+
+  writeDataToCard: writeDataToCard
   readWriteTokenUrl: readWriteTokenUrl
   getFromCollection: getFromCollection
   getItemFromCollection: getItemFromCollection
