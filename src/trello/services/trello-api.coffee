@@ -64,18 +64,12 @@ angular.module '%module%.trello'
     url += '?key=' + applicationKey
     url += '&token=' + token
     $http
-      url: apiUrl
-      method:"PUT"
+      url: url
+      method: "PUT"
       headers:
-        # 'Authorization': 'Basic dGVzdDp0ZXN0',
-        # 'Access-Control-Allow-Origin': '*'
-        'Content-Type': undefined#'text/html'
-      data:
+        'Content-Type': undefined
+      params:
         value: JSON.stringify data
-
-    # $http.put url, value: JSON.stringify data
-    # .then (res) ->
-    #   res.data
 
   writeDataToCard: writeDataToCard
   readWriteTokenUrl: readWriteTokenUrl
