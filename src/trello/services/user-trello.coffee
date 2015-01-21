@@ -6,6 +6,8 @@ angular.module '%module%.trello'
   userTokenDeferred = $q.defer()
   boardIdDeferred = $q.defer()
 
+  doneListCards = undefined
+
   getUserRecord = ->
     userTokenDeferred.promise
     .then (token) ->
@@ -57,7 +59,7 @@ angular.module '%module%.trello'
           return undefined
 
   getDoneListCards = (listId) ->
-    deferred = $q.defer()
+    return doneListCards if doneListCards
     doneCards = []
     getCardsFromList listId
     .then (cards) ->
@@ -68,6 +70,7 @@ angular.module '%module%.trello'
       .then (results) ->
         for card, i in cards
           card.movedDate = results[i] if results[i]?
+        doneListCards = cards
         cards
 
   getList = (listId) ->

@@ -10,6 +10,7 @@ angular.module '%module%.trello'
 
   $scope.submitBoardId = ->
     UserTrello.setUserBoardId $rootScope.user.boardId
+    UserTrello.setMemberId $rootScope.user.memberId
 
   $scope.submitLists = ->
     UserTrello.setUserLists $scope.myLists

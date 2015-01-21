@@ -1,6 +1,6 @@
 angular.module '%module%.bdc'
 .factory 'BdcData',
-($window, $rootScope, Resources, UserTrello) ->
+($window, $rootScope, $q, Resources, UserTrello) ->
   getCardPoints = (card) ->
     return unless card.name
     match = card.name.match /\(([-+]?[0-9]*\.?[0-9]+)\)/
@@ -53,7 +53,7 @@ angular.module '%module%.bdc'
     totalDone = 0
     data = []
     # Fuck*** bdc, how does it work ?
-    UserTrello.getDoneListCards settings.lists.done
+    $q.when UserTrello.getDoneListCards settings.lists.done
     .then (doneCards) ->
       for day, i in settings.sprintDays
         if i > 0
