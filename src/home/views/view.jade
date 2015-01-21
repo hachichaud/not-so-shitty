@@ -26,23 +26,38 @@ md-content.md-padding(ui-view)
     md-content.md-padding(
       md-theme="blue"
     )
-    span Go to 
-    a(
-      ng-href="{{requestTokenUrl}}"
-      target="_blank"
+      span Go to 
+      a(
+        ng-href="{{requestTokenUrl}}"
+        target="_blank"
+      )
+        | request token from Trello
+      
+      span  and paste token : 
+      md-text-float.trello-token-input(
+        label="Trello token"
+        ng-model="user.trelloToken"
+      )
+      md-button.md-raised.md-primary(
+        ng-click="submitTrelloToken()"
+      ) OK
+      p Note : this will grant read/write access to your trello board for 30 days
+    md-content.md-padding(
+      md-theme="orange"
     )
-      | request token from Trello
-    
-    span  and paste token : 
-    md-text-float.trello-token-input(
-      label="Trello token"
-      ng-model="user.trelloToken"
-    )
-    md-button.md-raised.md-primary(
-      ng-click="submitTrelloToken()"
-    ) OK
-    p Note : this will grant read/write access to your trello board for 30 days
+      span Fill the id of the card that contains your settings
+      p ex with : https://trello.com/c/j0l14fpd/666-yolo-card
+        | id is "j0l14fpd"
+      
+      md-text-float.trello-token-input(
+        label="Trello master card"
+        ng-model="user.trelloCardId"
+      )
+      md-button.md-raised.md-primary(
+        ng-click="submitCardId()"
+      ) OK
 
-  md-button(
+  md-button.md-raised.md-primary(
+    md-theme="orange"
     ng-click="getBoardFromTrello()"
   ) GET STUFF

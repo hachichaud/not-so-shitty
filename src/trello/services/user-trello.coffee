@@ -7,7 +7,7 @@ angular.module '%module%.trello'
   boardIdDeferred = $q.defer()
   cardIdDeferred = $q.defer()
   # TODO
-  cardIdDeferred.resolve '54bf9225e42817da3ac9544a'
+  # cardIdDeferred.resolve '54bf9225e42817da3ac9544a'
 
   doneListCards = undefined
 
@@ -152,6 +152,12 @@ angular.module '%module%.trello'
     $rootScope.user.trelloToken = token
     userTokenDeferred.resolve token
 
+  setTrelloCardId = (trelloCardId) ->
+    return unless trelloCardId?
+    $window.localStorage.trelloCardId = trelloCardId
+    $rootScope.user.trelloCardId = trelloCardId
+    cardIdDeferred.resolve trelloCardId
+
   setUserLists = (lists) ->
     return unless lists?
     $window.localStorage.lists = JSON.stringify lists
@@ -170,6 +176,12 @@ angular.module '%module%.trello'
       userTokenDeferred.resolve $window.localStorage.userToken
       $rootScope.user.trelloToken = $window.localStorage.userToken
     userTokenDeferred.promise
+
+  getTrelloCardId = ->
+    if $window.localStorage.trelloCardId
+      cardIdDeferred.resolve $window.localStorage.trelloCardId
+      $rootScope.user.trelloCardId = $window.localStorage.trelloCardId
+    cardIdDeferred.promise
 
   getUserBoardId = ->
     if $window.localStorage.boardId
@@ -203,6 +215,7 @@ angular.module '%module%.trello'
     getSprintDays()
     getMemberId()
     getUserName()
+    getTrelloCardId()
 
   saveSettings = (user) ->
     setUserBoardId user.boardId
@@ -218,6 +231,9 @@ angular.module '%module%.trello'
 
   init()
 
+
+  getTrelloCardId: getTrelloCardId
+  setTrelloCardId: setTrelloCardId
   getBoardFromTrello: getBoardFromTrello
   saveToTrello: saveToTrello
   readWriteTokenUrl: TrelloApi.readWriteTokenUrl

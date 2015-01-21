@@ -7,5 +7,9 @@ angular.module '%module%.home'
     return unless $rootScope.user.trelloToken
     UserTrello.setUserToken $rootScope.user.trelloToken
 
+  $scope.submitCardId = ->
+    return unless $rootScope.user.trelloCardId
+    UserTrello.setTrelloCardId $rootScope.user.trelloCardId
+
   $scope.getBoardFromTrello = ->
     UserTrello.getBoardFromTrello()
