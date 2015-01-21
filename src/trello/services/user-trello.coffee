@@ -21,8 +21,14 @@ angular.module '%module%.trello'
           result = JSON.parse data._value
           for key, value of result
             $rootScope.user[key] = value
-          saveSettings $rootScope.user
           # console.log 'data from trello ', result
+          saveSettings $rootScope.user
+          # TODO move all this burk burk
+          $window.localStorage.team = JSON.stringify result.team
+          $window.localStorage.sprintPoints = JSON.stringify result.sprintPoints
+          $window.localStorage.resources = JSON.stringify result.resources
+          $window.localStorage.totalJH = result.totalJH
+          $window.localStorage.speed = result.speed
 
   saveToTrello = (data) ->
     dataToSend = angular.copy data
