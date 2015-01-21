@@ -5,8 +5,19 @@ angular.module '%module%.trello'
   $rootScope.user ?= {}
   userTokenDeferred = $q.defer()
   boardIdDeferred = $q.defer()
+  cardIdDeferred = $q.defer()
+  # TODO
+  cardIdDeferred.resolve '54bf9225e42817da3ac9544a'
 
   doneListCards = undefined
+
+  saveToTrello = (user) ->
+    console.log 'save to trello', user
+    cardIdDeferred.promise
+    .then (cardId) ->
+      userTokenDeferred.promise
+      .then (token) ->
+        TrelloApi.writeDataToCard cardId, token, user
 
   getUserRecord = ->
     userTokenDeferred.promise
@@ -15,6 +26,8 @@ angular.module '%module%.trello'
       .then (res) ->
         $rootScope.user.memberId = res.id
         $rootScope.user.username = res.username
+        setMemberId res.id
+        setUserName res.username
         res
 
   getUserBoards = ->
@@ -169,6 +182,7 @@ angular.module '%module%.trello'
     getUserName()
 
   saveSettings = (user) ->
+    setUserBoardId user.boardId
     setUserToken user.trelloToken
     setUserLists user.lists
     setSprintDays user.sprintDays
@@ -181,6 +195,7 @@ angular.module '%module%.trello'
 
   init()
 
+  saveToTrello: saveToTrello
   readWriteTokenUrl: TrelloApi.readWriteTokenUrl
   getList: getList
   getMembers: getMembers

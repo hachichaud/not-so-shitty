@@ -1,6 +1,6 @@
 angular.module '%module%.burndown'
 .controller 'BurnDownCtrl',
-($scope, $rootScope, bdcSettings, BdcData) ->
+($scope, $rootScope, bdcSettings, BdcData, UserTrello) ->
   $rootScope.dayPlusOne = false
   updateGraph = ->
     BdcData.updateData bdcSettings, $rootScope.dayPlusOne
@@ -11,5 +11,8 @@ angular.module '%module%.burndown'
   $scope.toggleDayPlusOne = ->
     $rootScope.dayPlusOne = !$rootScope.dayPlusOne
     updateGraph()
+
+  $scope.saveToTrello = ->
+    UserTrello.saveToTrello $rootScope.user
 
   updateGraph()

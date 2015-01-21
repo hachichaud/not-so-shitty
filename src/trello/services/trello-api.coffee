@@ -58,7 +58,20 @@ angular.module '%module%.trello'
     .then (res) ->
       res.data
 
+  writeDataToCard = (cardId, token, data) ->
+    return unless token?
+    url = apiUrl + '/cards/' + cardId + '/desc'
+    url += '?key=' + applicationKey
+    url += '&token=' + token
+    $http
+      url: url
+      method: "PUT"
+      headers:
+        'Content-Type': undefined
+      params:
+        value: JSON.stringify data
 
+  writeDataToCard: writeDataToCard
   readWriteTokenUrl: readWriteTokenUrl
   getFromCollection: getFromCollection
   getItemFromCollection: getItemFromCollection

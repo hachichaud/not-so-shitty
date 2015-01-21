@@ -1,6 +1,6 @@
 angular.module '%module%.burndown'
 .factory 'BurndownSettings',
-($window, $rootScope, UserTrello, Resources) ->
+($window, $rootScope, UserTrello, Resources, BdcData) ->
   saveTeam = ->
     $window.localStorage.team = JSON.stringify $rootScope.user.team
     $window.localStorage.resources = JSON.stringify $rootScope.user.resources
@@ -30,6 +30,29 @@ angular.module '%module%.burndown'
     if (not $rootScope.user.team) or (not $rootScope.user.resources)
       initTeam $rootScope.user.memberId
     $rootScope.user
+
+  update = ->
+    BdcData.updateData $rootScope.user, $rootScope.dayPlusOne
+    .then (data) ->
+      $rootScope.graphData = data
+
+  $rootScope.$on 'resources:changed', ->
+    saveTeam()
+    update()
+
+  $rootScope.$on 'team:dev:add', ->
+    addDev()
+    update()
+
+  $rootScope.$on 'team:dev:remove', (event, index) ->
+    removeDev index
+    update()
+
+  $rootScope.$on 'sprintspeed:changed', ->
+    BdcData.updateButSprintSpeed $rootScope.user, $rootScope.dayPlusOne
+    .then (data) ->
+      $rootScope.graphData = data
+  
 
   getSettings: getSettings
   saveTeam: saveTeam
