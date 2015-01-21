@@ -11,13 +11,30 @@ angular.module '%module%.trello'
 
   doneListCards = undefined
 
-  saveToTrello = (user) ->
-    console.log 'save to trello', user
+  getBoardFromTrello = ->
+    userTokenDeferred.promise
+    .then (token) ->
+      cardIdDeferred.promise
+      .then (cardId) ->
+        TrelloApi.getCardDesc cardId, token
+        .then (data) ->
+          result = JSON.parse data._value
+          for key, value of result
+            $rootScope.user[key] = value
+          saveSettings $rootScope.user
+          # console.log 'data from trello ', result
+
+  saveToTrello = (data) ->
+    dataToSend = angular.copy data
+    delete dataToSend.trelloToken
+    delete dataToSend.memberId
+    delete dataToSend.username
+    # console.log 'save to trello', dataToSend
     cardIdDeferred.promise
     .then (cardId) ->
       userTokenDeferred.promise
       .then (token) ->
-        TrelloApi.writeDataToCard cardId, token, user
+        TrelloApi.writeDataToCard cardId, token, dataToSend
 
   getUserRecord = ->
     userTokenDeferred.promise
@@ -195,6 +212,7 @@ angular.module '%module%.trello'
 
   init()
 
+  getBoardFromTrello: getBoardFromTrello
   saveToTrello: saveToTrello
   readWriteTokenUrl: TrelloApi.readWriteTokenUrl
   getList: getList

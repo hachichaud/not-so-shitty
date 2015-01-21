@@ -19,3 +19,30 @@ md-content.md-padding(
     ) MEPGRAPH(wip)
 
 md-content.md-padding(ui-view)
+  h3 Here to get settings from trello
+  
+  h4 Please allow NotSoShitty inside your Trello first <3
+  md-content
+    md-content.md-padding(
+      md-theme="blue"
+    )
+    span Go to 
+    a(
+      ng-href="{{requestTokenUrl}}"
+      target="_blank"
+    )
+      | request token from Trello
+    
+    span  and paste token : 
+    md-text-float.trello-token-input(
+      label="Trello token"
+      ng-model="user.trelloToken"
+    )
+    md-button.md-raised.md-primary(
+      ng-click="submitTrelloToken()"
+    ) OK
+    p Note : this will grant read/write access to your trello board for 30 days
+
+  md-button(
+    ng-click="getBoardFromTrello()"
+  ) GET STUFF

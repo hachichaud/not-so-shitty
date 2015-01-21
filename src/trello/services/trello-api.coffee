@@ -8,7 +8,7 @@ angular.module '%module%.trello'
   applicationKey = '820fea551eb26ccde968e547a1c1ad4e'
 
   readWriteTokenUrl = 'https://trello.com/1/authorize?key=' + applicationKey
-  readWriteTokenUrl += '&expiration=1day&response_type=token&scope=read,write'
+  readWriteTokenUrl += '&expiration=30days&response_type=token&scope=read,write'
 
   getUserRecord = (token) ->
     return unless token?
@@ -58,6 +58,15 @@ angular.module '%module%.trello'
     .then (res) ->
       res.data
 
+  getCardDesc = (cardId, token) ->
+    return unless token?
+    url = apiUrl + '/cards/' + cardId + '/desc'
+    url += '?key=' + applicationKey
+    url += '&token=' + token
+    $http.get url
+    .then (res) ->
+      res.data
+
   writeDataToCard = (cardId, token, data) ->
     return unless token?
     url = apiUrl + '/cards/' + cardId + '/desc'
@@ -71,6 +80,7 @@ angular.module '%module%.trello'
       params:
         value: JSON.stringify data
 
+  getCardDesc: getCardDesc
   writeDataToCard: writeDataToCard
   readWriteTokenUrl: readWriteTokenUrl
   getFromCollection: getFromCollection
