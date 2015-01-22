@@ -29,6 +29,22 @@ Go to burndown page : yolo
 #### If there are issues or weird stuff
 Clear local storage, start again
 
+### Nginx minimal conf
+
+```
+# in /nginx/sites-available
+server {
+  root /var/www/not-so-shitty/www;
+  index index.html;
+
+  location / {
+    try_files $uri /index.html;
+  }
+}
+```
+
+> Note : If you encounter issues with routing, check if `base(href="/")` is in your index.html
+
 ### Tests lol
 
 ```bash
@@ -53,7 +69,9 @@ npm run test:functional
 git submodule foreach git pull origin master
 ```
 
-### Livereload prout
+### Livereload
+
+> (pas besoin ???)
 
 [Chrome extention](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)
 
