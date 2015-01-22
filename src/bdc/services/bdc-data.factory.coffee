@@ -25,16 +25,23 @@ angular.module '%module%.bdc'
     else return
 
   getDoneBetweenDays = (doneCards, start, end, lastDay, dayPlusOne) ->
+    # console.log donePoints + ' between ' + start?.label + ' and ' + end.label
     return unless end
+    # console.log 'getDoneBetweenDays :', start, end
     if dayPlusOne
       return if moment(end.date).isAfter moment().add(1, 'days')
     else
       return if moment(end.date).isAfter moment()
-    # console.log 'getDoneBetweenDays :', start, end
+
     if lastDay
+      if dayPlusOne
+        return if moment(start.date).add(1, 'days').isBefore moment()
+      else
+        return if moment(start.date).isBefore moment()
       endDate = new Date()
     else
       endDate = end.date
+
     donePoints = 0
     for card in doneCards
       if card.movedDate
@@ -44,7 +51,6 @@ angular.module '%module%.bdc'
               donePoints += getCardPoints card
           else if not start
             donePoints += getCardPoints card
-    # console.log donePoints + ' between ' + start?.label + ' and ' + end.label
     donePoints
 
   generateGraphData = (settings, dayPlusOne) ->
@@ -60,7 +66,7 @@ angular.module '%module%.bdc'
         if i > 0
           dayResources = _.reduce settings.resources[i - 1], (s, n) -> s + n
           standard = standard - dayResources*settings.speed
-          totalDone += getDoneBetweenDays doneCards, previousDay, settings.sprintDays[i], ((i) >= settings.sprintDays.length - 1), dayPlusOne
+          totalDone += getDoneBetweenDays doneCards, previousDay, settings.sprintDays[i], false, dayPlusOne
           diff = standard - (settings.sprintPoints - totalDone) unless isNaN(totalDone)
           previousDay = settings.sprintDays[i]
         else
