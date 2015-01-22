@@ -11,11 +11,18 @@ angular.module '%module%.trello'
 
   doneListCards = undefined
 
+  clearLocalStorage = (exceptions) ->
+    $window.localStorage.clear()
+    if exceptions
+      for key, value of exceptions
+        $window.localStorage.key = value
+
   getBoardFromTrello = ->
     userTokenDeferred.promise
     .then (token) ->
       cardIdDeferred.promise
       .then (cardId) ->
+        clearLocalStorage {userToken: token, trelloCardId: cardId}
         TrelloApi.getCardDesc cardId, token
         .then (data) ->
           result = JSON.parse data._value
