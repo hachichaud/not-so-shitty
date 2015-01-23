@@ -13,10 +13,8 @@ angular.module '%module%.burndown'
     updateGraph()
 
   $scope.saveToTrello = ->
-    UserTrello.saveToTrello $rootScope.user
+    UserTrello.saveToTrello $rootScope.user, $rootScope.user.trelloCardId
     .then ->
-      UserTrello.getTrelloShareLink()
-      .then (link) ->
-        $scope.trelloShareLink = link
+      $scope.trelloShareLink = UserTrello.getTrelloShareLink $rootScope.user.trelloCardId
 
   updateGraph()

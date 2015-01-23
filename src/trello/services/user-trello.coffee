@@ -12,14 +12,13 @@ angular.module '%module%.trello'
   doneListCards = undefined
 
 
-  getTrelloShareLink = ->
-    cardIdDeferred.promise
-    .then (cardId) ->
-      returnUrl = $state.href 'mastercard', { cardId: cardId }, { absolute: true }
-      link = TrelloApi.readWriteTokenUrl
-      link += '&return_url=' + returnUrl
-      link += '&callback_method=fragment'
-      link
+  getTrelloShareLink = (newCardId) ->
+    setTrelloCardId newCardId
+    returnUrl = $state.href 'mastercard', { cardId: newCardId }, { absolute: true }
+    link = TrelloApi.readWriteTokenUrl
+    link += '&return_url=' + returnUrl
+    link += '&callback_method=fragment'
+    link
 
   clearLocalStorage = (exceptions) ->
     $window.localStorage.clear()
@@ -47,19 +46,20 @@ angular.module '%module%.trello'
           $window.localStorage.totalJH = result.totalJH
           $window.localStorage.speed = result.speed
 
-  saveToTrello = (data) ->
+  saveToTrello = (data, cardId) ->
     dataToSend = angular.copy data
     delete dataToSend.trelloToken
     delete dataToSend.memberId
     delete dataToSend.username
-    # console.log 'save to trello', dataToSend
-    cardIdDeferred.promise
-    .then (cardId) ->
-      userTokenDeferred.promise
-      .then (token) ->
-        TrelloApi.writeDataToCard cardId, token, dataToSend
-        .then ->
-          console.log 'written to trello'
+    delete dataToSend.trelloCardId
+
+    setTrelloCardId cardId
+
+    userTokenDeferred.promise
+    .then (token) ->
+      TrelloApi.writeDataToCard cardId, token, dataToSend
+      .then ->
+        console.log 'written to trello'
 
   getUserRecord = ->
     userTokenDeferred.promise
