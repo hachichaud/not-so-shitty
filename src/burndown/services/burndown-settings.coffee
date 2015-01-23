@@ -2,6 +2,7 @@ angular.module '%module%.burndown'
 .factory 'BurndownSettings',
 ($window, $rootScope, UserTrello, Resources, BdcData) ->
   saveTeam = ->
+    return unless $rootScope.user.team and $rootScope.user.resources
     $window.localStorage.team = JSON.stringify $rootScope.user.team
     $window.localStorage.resources = JSON.stringify $rootScope.user.resources
 
@@ -52,7 +53,7 @@ angular.module '%module%.burndown'
     BdcData.updateButSprintSpeed $rootScope.user, $rootScope.dayPlusOne
     .then (data) ->
       $rootScope.graphData = data
-  
+
 
   getSettings: getSettings
   saveTeam: saveTeam

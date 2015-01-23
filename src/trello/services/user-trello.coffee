@@ -217,14 +217,15 @@ angular.module '%module%.trello'
       $rootScope.user.username = $window.localStorage.username
 
   getTeam = ->
-    if $window.localStorage.team
+    if $window.localStorage.team and /\{*\}/.test $window.localStorage.team
       $rootScope.user.team = JSON.parse $window.localStorage.team
 
   getResources = ->
-    if $window.localStorage.resources
+    if $window.localStorage.resources and /\[*\]/.test $window.localStorage.resources
       $rootScope.user.resources = JSON.parse $window.localStorage.resources
 
   init = ->
+    return if $state.current.name is 'mastercard'
     getTeam()
     getResources()
     getUserRecord()
