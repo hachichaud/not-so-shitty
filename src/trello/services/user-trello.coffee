@@ -1,6 +1,6 @@
 angular.module '%module%.trello'
 .factory 'UserTrello',
-($rootScope, $window, $q, TrelloApi) ->
+($rootScope, $window, $q, $state, TrelloApi) ->
   # TODO separate trello and storage
   $rootScope.user ?= {}
   userTokenDeferred = $q.defer()
@@ -10,6 +10,16 @@ angular.module '%module%.trello'
   # cardIdDeferred.resolve '54bf9225e42817da3ac9544a'
 
   doneListCards = undefined
+
+
+  getTrelloShareLink = ->
+    cardIdDeferred.promise
+    .then (cardId) ->
+      returnUrl = $state.href 'mastercard', { cardId: cardId }, { absolute: true }
+      link = TrelloApi.readWriteTokenUrl
+      link += '&return_url=' + returnUrl
+      link += '&callback_method=fragment'
+      link
 
   clearLocalStorage = (exceptions) ->
     $window.localStorage.clear()
@@ -48,6 +58,8 @@ angular.module '%module%.trello'
       userTokenDeferred.promise
       .then (token) ->
         TrelloApi.writeDataToCard cardId, token, dataToSend
+        .then ->
+          console.log 'written to trello'
 
   getUserRecord = ->
     userTokenDeferred.promise
@@ -262,3 +274,4 @@ angular.module '%module%.trello'
   saveSettings: saveSettings
   getUserSettings: getUserSettings
   getDoneListCards: getDoneListCards
+  getTrelloShareLink: getTrelloShareLink

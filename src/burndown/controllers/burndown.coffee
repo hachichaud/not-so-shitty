@@ -14,5 +14,9 @@ angular.module '%module%.burndown'
 
   $scope.saveToTrello = ->
     UserTrello.saveToTrello $rootScope.user
+    .then ->
+      UserTrello.getTrelloShareLink()
+      .then (link) ->
+        $scope.trelloShareLink = link
 
   updateGraph()
