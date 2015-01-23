@@ -15,3 +15,6 @@ angular.module '%module%.burndown'
     resolve:
       bdcSettings: (BurndownSettings) ->
         BurndownSettings.getSettings()
+  .state 'mastercard',
+    url: '/mastercard/:cardId/:token'
+    controller: 'BoardCtrl'
