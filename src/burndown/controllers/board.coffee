@@ -1,7 +1,7 @@
 angular.module '%module%.burndown'
 .controller 'BoardCtrl',
 ($stateParams, $state, UserTrello) ->
-
+  UserTrello.clearLocalStorage()
   if $stateParams.cardId
     if not $stateParams.token
       href = location.href.split /#token=/

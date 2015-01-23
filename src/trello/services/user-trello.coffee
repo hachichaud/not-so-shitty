@@ -275,3 +275,4 @@ angular.module '%module%.trello'
   getUserSettings: getUserSettings
   getDoneListCards: getDoneListCards
   getTrelloShareLink: getTrelloShareLink
+  clearLocalStorage: clearLocalStorage
