@@ -2,6 +2,6 @@ angular.module '%module%.scrumboard'
 .config ($stateProvider) ->
   $stateProvider
   .state 'scrumboard',
-    url: '/scrumboard'
+    url: '/'
     templateUrl: 'scrumboard/views/scrumboard.html'
     controller: 'ScrumBoardCtrl'
