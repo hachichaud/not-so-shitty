@@ -1,3 +1,12 @@
 angular.module '%module%.setup'
-.controller 'SetupCtrl', ($scope, boards) ->
+.controller 'SetupCtrl',
+($scope, Setup, boards, storage) ->
+  storage.setup ?= {}
+  $scope.setup = storage.setup
   $scope.boards = boards
+  # Get board colums when board is set
+  $scope.$watch 'setup.boardId', (next, prev) ->
+    return unless next
+    Setup.getBoardColumns next
+    .then (col) ->
+      $scope.boardColumns = col

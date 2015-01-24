@@ -11,4 +11,15 @@ angular.module '%module%.setup'
     .then (res) ->
       res.data
 
+  getBoardColumns = (boardId) ->
+    $http
+      method: 'get'
+      url: trello.apiUrl + '/boards/' + boardId + '/lists'
+      params:
+        key: trello.applicationKey
+        token: storage.token
+    .then (res) ->
+      res.data
+
   getBoards: getBoards
+  getBoardColumns: getBoardColumns

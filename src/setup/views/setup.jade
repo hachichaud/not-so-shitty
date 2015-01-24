@@ -1,14 +1,18 @@
 h1 haha Setup
-
+pre {{ setup.columns | json }}
 md-content
   h4 Board
   select-board(
     boards="boards"
-    board="board"
+    board-id="setup.boardId"
   )
 
 md-content
   h4 Columns
+  select-columns(
+    board-columns="boardColumns"
+    column-ids="setup.columnIds"
+  )
 
 md-content
   h4 Resources

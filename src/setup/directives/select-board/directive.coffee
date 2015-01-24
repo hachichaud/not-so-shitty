@@ -4,5 +4,5 @@ angular.module '%module%.setup'
   templateUrl: 'setup/directives/select-board/view.html'
   scope:
     boards: '='
-    board: '='
+    boardId: '='
   controller: 'SelectBoardCtrl'

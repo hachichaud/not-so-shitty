@@ -1,0 +1,5 @@
+p Select Done column
+select(
+  ng-options="column.id as column.name for column in boardColumns"
+  ng-model="columnIds.done"
+) 
