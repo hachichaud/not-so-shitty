@@ -8,5 +8,7 @@ angular.module '%module%.setup'
       params:
         key: trello.applicationKey
         token: storage.token
+    .then (res) ->
+      res.data
 
   getBoards: getBoards
