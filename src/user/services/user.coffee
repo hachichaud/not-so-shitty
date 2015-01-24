@@ -1,13 +1,7 @@
 angular.module '%module%.user'
 .factory 'User',
-($http, $state, storage) ->
-  apiVersion = 1
-  # apiUrl = 'https://api.trello.com/' + apiVersion
-  authEndpoint = 'https://trello.com/' + apiVersion + '/authorize'
-  # https://trello.com/1/appKey/generate
-  applicationKey = '820fea551eb26ccde968e547a1c1ad4e'
-
-  authUrl = authEndpoint + '?key=' + applicationKey
+($http, $state, trello, storage) ->
+  authUrl = trello.authEndpoint + '?key=' + trello.applicationKey
   authUrl += '&expiration=30days'
   authUrl += '&response_type=token'
   authUrl += '&scope=read,write'

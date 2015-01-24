@@ -5,3 +5,5 @@ angular.module '%module%.setup'
     url: '/setup'
     templateUrl: 'setup/views/setup.html'
     controller: 'SetupCtrl'
+    resolve:
+      boards: (Setup) -> Setup.getBoards()

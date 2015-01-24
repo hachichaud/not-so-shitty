@@ -1,2 +1,3 @@
 angular.module '%module%.setup'
-.controller 'SetupCtrl', ->
+.controller 'SetupCtrl', ($scope, boards) ->
+  $scope.boards = boards
