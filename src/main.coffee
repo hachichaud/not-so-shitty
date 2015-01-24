@@ -13,6 +13,7 @@ angular.module '%module%', [
   'angular-datepicker'
   '%module%.utils'
   '%module%.home'
+  '%module%.scrumboard'
   '%module%.mepgraph'
   '%module%.trello'
   '%module%.burndown'
