@@ -20,6 +20,30 @@ angular.module '%module%.setup'
       current.add 1, 'days'
     days
 
+  generateResources = ->
+    $scope.resources.matrix = Setup.generateResources $scope.dates.days, $scope.team.dev
+    $scope.resources.totalManDays = $scope.dates.days.length * $scope.team.dev.length
+
   $scope.$watch 'dates.end', (newVal) ->
     return unless newVal?
     $scope.dates.days = generateDayList $scope.dates.start, $scope.dates.end
+
+  $scope.$watch 'dates.days', (newVal) ->
+    generateResources()
+
+  $scope.$watch 'team.dev', (newVal) ->
+    generateResources()
+
+  $scope.$watch 'resources.totalManDays', (newVal) ->
+    return unless newVal and newVal > 0
+    $scope.resources.speed = Setup.calculateSpeed $scope.resources.totalPoints, newVal
+
+  $scope.$watch 'resources.totalPoints', (newVal, oldVal) ->
+    return if newVal is oldVal
+    return unless newVal and newVal > 0
+    $scope.resources.speed = Setup.calculateSpeed newVal, $scope.resources.totalManDays
+
+  $scope.$watch 'resources.speed', (newVal, oldVal) ->
+    return if newVal is oldVal
+    return unless newVal and newVal > 0
+    $scope.resources.totalPoints = Setup.calculateTotalPoints $scope.resources.totalManDays, newVal

@@ -1,6 +1,23 @@
 angular.module '%module%.setup'
 .factory 'Setup',
 ($http, storage, trello) ->
+  calculateTotalPoints = (totalManDays, speed) ->
+    totalManDays * speed
+
+  calculateSpeed = (totalPoints, totalManDays) ->
+    return unless totalManDays > 0
+    totalPoints / totalManDays
+
+  generateResources = (days, devTeam) ->
+    return unless days and devTeam
+    matrix = []
+    for day in days
+      line = []
+      for member in devTeam
+        line.push 1
+      matrix.push line
+    matrix
+
   getBoards = ->
     $http
       method: 'get'
@@ -34,3 +51,6 @@ angular.module '%module%.setup'
   getBoards: getBoards
   getBoardColumns: getBoardColumns
   getBoardMembers: getBoardMembers
+  generateResources: generateResources
+  calculateSpeed: calculateSpeed
+  calculateTotalPoints: calculateTotalPoints
