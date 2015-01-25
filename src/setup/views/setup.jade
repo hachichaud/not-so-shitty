@@ -1,38 +1,63 @@
-h1 Setup
-md-content
-  md-content
-    h4 Board
-    select-board(
-      boards="boards"
-      board-id="setup.boardId"
-    )
-
-  md-content
-    h4 Columns
-    select-columns(
-      board-columns="boardColumns"
-      column-ids="setup.columnIds"
-    )
-
-  md-content
-    h4 Resources
-    resources-widget(
-      board-members="boardMembers"
-      team="setup.team"
-      dates="setup.dates"
-      resources="setup.resources"
-    )
-
-  md-content
-    h4 Save to trello card Id
-    select-card(
-      columns="boardColumns"
-      card-id="setup.saveCardId"
-    )
-    save-to-trello(
-      card-id="setup.saveCardId"
-      data="setup"
-    )
+md-content.md-padding
+  h1 Setup
   a.md-button.md-raised.md-primary(
     ui-sref="scrumboard"
   ) To BDC
+.setup(
+  layout-fill
+  layout="column"
+  layout-gt-md="row"
+)
+  div(
+    layout-fill
+    layout="column"
+  )
+    md-toolbar
+      .md-toolbar-tools
+        h4 Board
+    md-content.md-padding
+      select-board(
+        boards="boards"
+        board-id="setup.boardId"
+      )
+    md-toolbar(md-theme="orange")
+      .md-toolbar-tools
+        h4 Columns
+    md-content.md-padding(md-theme="orange")
+      select-columns(
+        board-columns="boardColumns"
+        column-ids="setup.columnIds"
+      )
+  div(
+    layout-fill
+    layout="column"
+    md-theme="purple"
+  )
+    md-toolbar
+      .md-toolbar-tools
+        h4 Resources
+    md-content.md-padding
+      h4 Resources
+      resources-widget(
+        board-members="boardMembers"
+        team="setup.team"
+        dates="setup.dates"
+        resources="setup.resources"
+      )
+    md-toolbar(
+      md-theme="blue"
+    )
+      .md-toolbar-tools
+        h4 Save setup
+    md-content.md-padding(
+      md-theme="blue"
+    )
+      h4 Save to trello card
+      select-card(
+        columns="boardColumns"
+        card-id="setup.saveCardId"
+      )
+      save-to-trello(
+        card-id="setup.saveCardId"
+        data="setup"
+      )

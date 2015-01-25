@@ -1,11 +1,12 @@
-p resources widget directive
 .dev-team
+  p Select the dev team
   select(
     ng-options="member.id as member.fullName for member in boardMembers"
     multiple="true"
     ng-model="team.dev"
   )
-.days Format is YYYY-MM-DD
+.days Choose your sprint's start and end dates
+  p Format is YYYY-MM-DD
   label
     span Start day
     input(
@@ -22,7 +23,8 @@ p resources widget directive
     )
 .man-days(
   ng-if="dates.days"
-) Man-days/Day/Man \o/ ! TOTAL MAN-DAYS : {{ resources.totalManDays }}
+) TOTAL MAN-DAYS : {{ resources.totalManDays }}
+  p Man-days/Day/Man
   resources-by-day(
     days="dates.days"
     matrix="resources.matrix"

@@ -1,9 +1,16 @@
 .column(
+  layout-gt-lg="row"
+  layout="column"
   ng-repeat="type in listTypes"
 ) 
-  span.list-type Select {{ type }} column
+  .list-type(
+    flex-gt-lg="40"
+    flex
+  ) Select {{ type }} column
+    span.required(ng-if="type == 'done'")  (required)
   select(
+    flex-gt-lg="60"
+    flex
     ng-options="column.id as column.name for column in boardColumns"
     ng-model="columnIds[type]"
   )
-  span.required(ng-if="type == 'done'") *required
