@@ -1,3 +1,3 @@
 angular.module '%module%.scrumboard'
-.controller 'ScrumBoardCtrl', ->
-  
+.controller 'ScrumBoardCtrl', ($scope, doneCards) ->
+  $scope.doneCards = doneCards

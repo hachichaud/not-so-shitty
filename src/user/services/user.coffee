@@ -15,7 +15,7 @@ angular.module '%module%.user'
       storage.token = location.href.replace /.*#token=(.*)/, '$1'
     if storage.token
       event.preventDefault()
-      $state.go 'scrumboard'
+      $state.go 'setup'
 
   retrieveToken: retrieveToken
   loginUrl: loginUrl
