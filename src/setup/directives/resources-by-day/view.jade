@@ -1,23 +1,28 @@
-p Man-days/Day/Man
 .resources-by-day(
   layout="row"
 )
   .column(
+    flex="30"
     layout="column"
+    layout-align="center center"
   )
     .row &nbsp;
     .row(
+      layout
+      layout-align="center center"
       ng-repeat="(i, day) in days"
     ) {{ day.label }}
   .column(
+    flex
     layout="column"
+    layout-align="center center"
     ng-repeat="(j, member) in members"
   )
     .row
       trello-avatar(
         member-id="{{ member }}"
       )
-    .row(
+    md-button.md-primary.row(
       ng-click="resourceClick(i,j)"
       ng-repeat="(i, day) in days"
     ) {{ matrix[i][j] }}
