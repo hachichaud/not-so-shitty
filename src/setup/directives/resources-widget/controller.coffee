@@ -18,23 +18,28 @@ angular.module '%module%.setup'
           date: current.format()
         }
       current.add 1, 'days'
-    days
 
-  $scope.$watch 'dates.end', (newVal) ->
+
+  $scope.$watch 'dates.end', (newVal, oldVal) ->
+    return if newVal is oldVal
     return unless newVal?
     $scope.dates.days = generateDayList $scope.dates.start, $scope.dates.end
 
-  $scope.$watch 'dates.days', (newVal) ->
+  $scope.$watch 'dates.days', (newVal, oldVal) ->
+    return if newVal is oldVal
     $scope.resources.matrix = Setup.generateResources $scope.dates?.days, $scope.team?.dev
 
-  $scope.$watch 'team.dev', (newVal) ->
+  $scope.$watch 'team.dev', (newVal, oldVal) ->
+    return if newVal is oldVal
     $scope.resources.matrix = Setup.generateResources $scope.dates?.days, $scope.team?.dev
 
-  $scope.$watch 'resources.matrix', (newVal) ->
+  $scope.$watch 'resources.matrix', (newVal, oldVal) ->
+    return if newVal is oldVal
     return unless newVal
     $scope.resources.totalManDays = Setup.getTotalManDays newVal
 
-  $scope.$watch 'resources.totalManDays', (newVal) ->
+  $scope.$watch 'resources.totalManDays', (newVal, oldVal) ->
+    return if newVal is oldVal
     return unless newVal and newVal > 0
     $scope.resources.speed = Setup.calculateSpeed $scope.resources.totalPoints, newVal
 

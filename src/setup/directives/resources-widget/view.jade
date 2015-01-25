@@ -23,24 +23,11 @@ p resources widget directive
 .man-days(
   ng-if="dates.days"
 ) Man-days/Day/Man \o/ ! TOTAL MAN-DAYS : {{ resources.totalManDays }}
-  .resources-by-day(
-    layout="row"
+  resources-by-day(
+    days="dates.days"
+    matrix="resources.matrix"
+    members="team.dev"
   )
-    .column(
-      layout="column"
-    )
-      .row &nbsp;
-      .row(
-        ng-repeat="(i, day) in dates.days"
-      ) {{ day.label }}
-    .column(
-      layout="column"
-      ng-repeat="(j, member) in team.dev"
-    )
-      .row {{ member }}
-      .row(
-        ng-repeat="(i, day) in dates.days"
-      ) {{ resources.matrix[i][j] }}
 
 .sprint-points
   label

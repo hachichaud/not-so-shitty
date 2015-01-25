@@ -96,3 +96,4 @@ angular.module '%module%.setup'
   getCardsFromColumn: getCardsFromColumn
   getCard: getCard
   saveToCard: saveToCard
+  getTotalManDays: getTotalManDays

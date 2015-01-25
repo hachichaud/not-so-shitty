@@ -1,0 +1,20 @@
+p Man-days/Day/Man
+.resources-by-day(
+  layout="row"
+)
+  .column(
+    layout="column"
+  )
+    .row &nbsp;
+    .row(
+      ng-repeat="(i, day) in days"
+    ) {{ day.label }}
+  .column(
+    layout="column"
+    ng-repeat="(j, member) in members"
+  )
+    .row {{ member }}
+    .row(
+      ng-click="resourceClick(i,j)"
+      ng-repeat="(i, day) in days"
+    ) {{ matrix[i][j] }}
