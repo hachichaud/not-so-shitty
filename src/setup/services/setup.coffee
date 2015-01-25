@@ -18,6 +18,16 @@ angular.module '%module%.setup'
       matrix.push line
     matrix
 
+  getCardsFromColumn = (listId) ->
+    $http
+      method: 'get'
+      url: trello.apiUrl + '/lists/' + listId + '/cards'
+      params:
+        key: trello.applicationKey
+        token: storage.token
+    .then (res) ->
+      res.data
+
   getBoards = ->
     $http
       method: 'get'
@@ -54,3 +64,4 @@ angular.module '%module%.setup'
   generateResources: generateResources
   calculateSpeed: calculateSpeed
   calculateTotalPoints: calculateTotalPoints
+  getCardsFromColumn: getCardsFromColumn
