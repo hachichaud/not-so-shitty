@@ -13,7 +13,10 @@ p Man-days/Day/Man
     layout="column"
     ng-repeat="(j, member) in members"
   )
-    .row {{ member }}
+    .row
+      trello-avatar(
+        member-id="{{ member }}"
+      )
     .row(
       ng-click="resourceClick(i,j)"
       ng-repeat="(i, day) in days"

@@ -28,22 +28,6 @@ md-content.md-padding
         board-columns="boardColumns"
         column-ids="setup.columnIds"
       )
-  div(
-    layout-fill
-    layout="column"
-    md-theme="purple"
-  )
-    md-toolbar
-      .md-toolbar-tools
-        h4 Resources
-    md-content.md-padding
-      h4 Resources
-      resources-widget(
-        board-members="boardMembers"
-        team="setup.team"
-        dates="setup.dates"
-        resources="setup.resources"
-      )
     md-toolbar(
       md-theme="blue"
     )
@@ -60,4 +44,19 @@ md-content.md-padding
       save-to-trello(
         card-id="setup.saveCardId"
         data="setup"
+      )
+  div(
+    layout-fill
+    layout="column"
+    md-theme="purple"
+  )
+    md-toolbar
+      .md-toolbar-tools
+        h4 Resources
+    md-content.md-padding
+      resources-widget(
+        board-members="boardMembers"
+        team="setup.team"
+        dates="setup.dates"
+        resources="setup.resources"
       )
