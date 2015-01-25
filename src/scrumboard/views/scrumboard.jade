@@ -1,4 +1,13 @@
 h1 haha scrumboard
+pre doneCards : {{setup.dates.days|json}}
 a(
   ui-sref="setup"
 ) setup
+
+h3 BDC
+burndown(
+  cards="doneCards"
+  resources="setup.resources"
+  days="setup.dates.days"
+  day-plus-one="false"
+)
