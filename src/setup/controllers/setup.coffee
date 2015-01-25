@@ -10,3 +10,6 @@ angular.module '%module%.setup'
     Setup.getBoardColumns next
     .then (col) ->
       $scope.boardColumns = col
+    Setup.getBoardMembers next
+    .then (boardMembers) ->
+      $scope.boardMembers = boardMembers

@@ -1,5 +1,5 @@
 h1 haha Setup
-pre {{ setup.columns | json }}
+pre {{ setup.team | json }}
 md-content
   h4 Board
   select-board(
@@ -16,6 +16,11 @@ md-content
 
 md-content
   h4 Resources
+  resources-widget(
+    board-members="boardMembers"
+    team="setup.team"
+    dates="setup.dates"
+  )
   p Team
   p sprint days
   p JH/J/person

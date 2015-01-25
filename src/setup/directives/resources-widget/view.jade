@@ -1,0 +1,22 @@
+p resources widget directive
+.dev-team
+  select(
+    ng-options="member.id as member.fullName for member in boardMembers"
+    multiple="true"
+    ng-model="team.dev"
+  )
+.days Format is YYYY-MM-DD
+  label
+    span Start day
+    input(
+      type="text"
+      ng-model="dates.start"
+      ng-pattern="datePattern"
+    )
+  label
+    span End day
+    input(
+      type="text"
+      ng-pattern="datePattern"
+      ng-model="dates.end"
+    )
