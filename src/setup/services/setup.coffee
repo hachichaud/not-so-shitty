@@ -1,6 +1,13 @@
 angular.module '%module%.setup'
 .factory 'Setup',
 ($http, storage, trello) ->
+  getTotalManDays = (matrix) ->
+    total = 0
+    for line in matrix
+      for cell in line
+        total += cell
+    total
+
   calculateTotalPoints = (totalManDays, speed) ->
     totalManDays * speed
 
