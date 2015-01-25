@@ -5,3 +5,4 @@ angular.module '%module%.setup'
   scope:
     boardColumns: '='
     columnIds: '='
+  controller: 'SelectColumnsCtrl'
