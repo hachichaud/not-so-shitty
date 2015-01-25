@@ -5,6 +5,11 @@
     multiple="true"
     ng-model="team.dev"
   )
+  .team
+    trello-avatar(
+      ng-repeat="memberId in team.dev"
+      member-id="{{memberId}}"
+    )
 .days Choose your sprint's start and end dates
   p Format is YYYY-MM-DD
   label
