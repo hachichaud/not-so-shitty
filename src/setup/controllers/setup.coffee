@@ -4,6 +4,7 @@ angular.module '%module%.setup'
   storage.setup ?= {}
   $scope.setup = storage.setup
   $scope.boards = boards
+  $scope.setup.resources ?= {}
   # Get board colums when board is set
   $scope.$watch 'setup.boardId', (next, prev) ->
     return unless next

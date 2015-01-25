@@ -8,6 +8,28 @@ angular.module '%module%.setup'
     return unless totalManDays > 0
     totalPoints / totalManDays
 
+  saveToCard = (cardId, data) ->
+    $http
+      method: 'put'
+      url: trello.apiUrl + '/cards/' + cardId + '/desc'
+      headers:
+        'Content-Type': undefined
+      params:
+        key: trello.applicationKey
+        token: storage.token
+        value: JSON.stringify data
+
+  getCard = (cardId) ->
+    return unless cardId
+    $http
+      method: 'get'
+      url: trello.apiUrl + '/cards/' + cardId
+      params:
+        key: trello.applicationKey
+        token: storage.token
+    .then (res) ->
+      res.data
+
   generateResources = (days, devTeam) ->
     return unless days and devTeam
     matrix = []
@@ -65,3 +87,5 @@ angular.module '%module%.setup'
   calculateSpeed: calculateSpeed
   calculateTotalPoints: calculateTotalPoints
   getCardsFromColumn: getCardsFromColumn
+  getCard: getCard
+  saveToCard: saveToCard

@@ -21,8 +21,8 @@ angular.module '%module%.setup'
     days
 
   generateResources = ->
-    $scope.resources.matrix = Setup.generateResources $scope.dates.days, $scope.team.dev
-    $scope.resources.totalManDays = $scope.dates.days.length * $scope.team.dev.length
+    $scope.resources.matrix = Setup.generateResources $scope.dates?.days, $scope.team?.dev
+    $scope.resources.totalManDays = $scope.dates?.days?.length * $scope.team?.dev?.length
 
   $scope.$watch 'dates.end', (newVal) ->
     return unless newVal?
