@@ -9,3 +9,5 @@ angular.module '%module%.setup'
     'toValidate'
     'done'
   ].reverse()
+
+  $scope.columnIds ?= {}
