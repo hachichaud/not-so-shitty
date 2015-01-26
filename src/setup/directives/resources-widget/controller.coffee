@@ -18,6 +18,7 @@ angular.module '%module%.setup'
           date: current.format()
         }
       current.add 1, 'days'
+    days
 
 
   $scope.$watch 'dates.end', (newVal, oldVal) ->
