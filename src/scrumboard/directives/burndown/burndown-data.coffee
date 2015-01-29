@@ -15,67 +15,58 @@ angular.module '%module%.scrumboard'
     if lastDay
       endDate = moment()
     else
-      endDate = end.date
+      endDate = moment(end.date)
+    endDate.add(1, 'days').hour(10)
+    if start?
+      startDate = moment(start.date).add(1, 'days').hour(10)
     donePoints = 0
     for card in doneCards
       if card.movedDate
         if moment(card.movedDate).isBefore(endDate)
-          if start
-            if moment(card.movedDate).isAfter(start.date)
+          if startDate
+            if moment(card.movedDate).isAfter(startDate)
               donePoints += getCardPoints card
           else if not start
             donePoints += getCardPoints card
     # console.log donePoints + ' between ' + start?.label + ' and ' + end.label
     donePoints
 
-  hideFutureDays = (value, day, dayPlusOne) ->
+  hideFuture = (value, day, today) ->
     return if isNaN value
-    if not dayPlusOne
-      return if moment().isBefore moment(day.date)
-    else
-      return if moment().isBefore moment(day.date).subtract(1, 'days')
+    return if moment(today).isBefore moment(day.date).add(1, 'days')
     value
 
   generateData = (cards, days, resources, dayPlusOne) ->
-  # generateGraphData = (settings, dayPlusOne) ->
     return unless cards and days and resources
-    standard = resources.totalPoints
-    totalDone = 0
     data = []
-    # Fuck*** bdc, how does it work ?
-    dayLabel = "Start"
-    for day, i in days
-      if i > 0
-        dayResources = _.reduce resources.matrix[i - 1], (s, n) -> s + n
-        standard = standard - dayResources*resources.speed
-        totalDone += getDoneBetweenDays cards, previousDay, days[i], false
-        diff = standard - (resources.totalPoints - totalDone) unless isNaN(totalDone)
-        previousDay = days[i]
-      else
-        standard = parseFloat(standard, 10)
-        left = parseFloat(standard, 10)
-        diff = 0
-        totalDone += 0
-      data.push {
-        "day": dayLabel
-        "standard": standard
-        "left": hideFutureDays resources.totalPoints - totalDone, day, dayPlusOne
-        "diff": hideFutureDays diff, day, dayPlusOne
-      }
-      dayLabel = day.label
-    # Last day
-    dayResources = _.reduce resources.matrix[days.length - 1], (s, n) -> s + n
-    standard = standard - dayResources*resources.speed
-    totalDone += getDoneBetweenDays cards, previousDay, days[days.length - 1], true
-    diff = standard - (resources.totalPoints - totalDone) unless isNaN(totalDone)
+    ideal = resources.speed * resources.totalManDays
+    doneToday = 0
+    diff = 0
+    today = Date().toString()
+    if dayPlusOne
+      today = moment(today).add(1, 'days').toString()
     data.push {
-      "day": dayLabel
-      "standard": standard
-      "left": hideFutureDays resources.totalPoints - totalDone, day, dayPlusOne
-      "diff": hideFutureDays diff, day, dayPlusOne
+      day: 'Start'
+      standard: ideal
+      left: ideal
+      diff: 0
     }
-    # console.log 'graph data ', data
-    # console.log 'total done ', totalDone
+    previousDay = undefined
+    for day, i in days
+      manDays = _.reduce resources.matrix[i], (s, n) -> s + n
+      donePoints = getDoneBetweenDays cards, days[i - 1], day, (i >= days.length - 1)
+      ideal = ideal - resources.speed * manDays
+      doneToday += donePoints
+      diff = ideal - (resources.totalPoints - doneToday)
+
+      data.push {
+        day: day.label
+        standard: ideal
+        left: hideFuture resources.totalPoints - doneToday, day, today
+        diff: hideFuture diff, day, today
+      }
+      previousDay = day
+
     data
 
   generateData: generateData
