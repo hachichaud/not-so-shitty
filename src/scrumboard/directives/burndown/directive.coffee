@@ -1,16 +1,22 @@
 angular.module '%module%.scrumboard'
-.directive 'burndown', ($filter, BurndownData) ->
+.directive 'burndown', ($filter) ->
   restrict: 'AE'
   scope:
-    cards: '='
-    resources: '='
-    days: '='
-    dayPlusOne: '='
+    data: '='
   templateUrl: 'scrumboard/directives/burndown/view.html'
   link: (scope, elem, attr) ->
+    maxWidth = 1000
+    whRatio = 0.54
+
+    if (window.innerWidth - 50) > maxWidth
+      width = (window.innerWidth) * 2 / 3
+    else
+      width = (window.innerWidth - 50)
+    height = whRatio * width
+
     config =
-      width: window.innerWidth - 20
-      height: window.innerHeight * 0.6
+      width: width#window.innerWidth - 50
+      height: height#window.innerHeight * 0.6
       margins:
         top: 70
         right: 70
@@ -21,7 +27,6 @@ angular.module '%module%.scrumboard'
         standard: '#D93F8E'
         foreground: '#5AA6CB'
         background: '#F2F2F2'
-    scope.config = config
 
     bdcgraph = d3.select '#bdcgraph'
 
@@ -314,15 +319,6 @@ angular.module '%module%.scrumboard'
       drawDoneLine cfg.color.foreground
       drawValues()
 
-    scope.$watch 'resources', (res) ->
-      return unless res
-      data = BurndownData.generateData scope.cards, scope.days, scope.resources, scope.dayPlusOne
-      render data, scope.config
-    scope.$watch 'days', (res) ->
-      return unless res
-      data = BurndownData.generateData scope.cards, scope.days, scope.resources, scope.dayPlusOne
-      render data, scope.config
-    scope.$watch 'cards', (res) ->
-      return unless res
-      data = BurndownData.generateData scope.cards, scope.days, scope.resources, scope.dayPlusOne
-      render data, scope.config
+    scope.$watch 'data', (data) ->
+      return unless data
+      render data, config

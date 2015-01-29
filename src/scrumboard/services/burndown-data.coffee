@@ -48,6 +48,7 @@ angular.module '%module%.scrumboard'
     data.push {
       day: 'Start'
       standard: ideal
+      done: 0
       left: ideal
       diff: 0
     }
@@ -61,6 +62,8 @@ angular.module '%module%.scrumboard'
 
       data.push {
         day: day.label
+        done: donePoints
+        manDays: manDays
         standard: ideal
         left: hideFuture resources.totalPoints - doneToday, day, today
         diff: hideFuture diff, day, today

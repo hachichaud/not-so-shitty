@@ -1,0 +1,33 @@
+md-content.md-padding(
+  layout="row"
+)
+  .column.days-column
+    .row &nbsp;
+    .row(ng-repeat="day in data", ng-hide="$first")
+      span {{day.day}}
+  .column
+    .row
+      span ToDo
+    .row(ng-repeat="day in data", ng-hide="$first")
+      span {{ day.left }}
+  .column
+    .row
+      span Ideal
+    .row(ng-repeat="day in data", ng-hide="$first")
+      span {{day.standard | number: 1 }}
+  .column
+    .row.md-primary.md-hue-1
+      span JH
+    .row(ng-repeat="day in data", ng-hide="$first")
+      span {{ day.manDays }}
+  .column
+    .row
+      span Today
+    .row(ng-repeat="day in data", ng-hide="$first")
+      span(ng-if="day.left") {{ day.done }}
+      span(ng-if="!day.left") &nbsp;
+  .column
+    .row
+      span Différence
+    .row(ng-repeat="day in data", ng-hide="$first")
+      span {{ day.diff | number: 1 }}

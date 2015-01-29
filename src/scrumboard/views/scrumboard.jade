@@ -1,13 +1,30 @@
 h1 Scrumboard
-//- pre doneCards : {{setup.dates.days|json}}
 a(
   ui-sref="setup"
 ) setup
 
-h3 BDC
-burndown(
-  cards="doneCards"
-  resources="setup.resources"
-  days="setup.dates.days"
-  day-plus-one="false"
+md-content.md-padding(
+  layout="column"
+  layout-align="center center"
+  md-theme="blue"
 )
+  md-whiteframe.md-whiteframe-z2
+    md-toolbar
+      .md-toolbar-tools
+        h3 BDC
+    md-content
+      burndown(
+        data="bdcData"
+      )
+
+  md-whiteframe.md-whiteframe-z2(
+    md-theme="purple"
+  )
+    md-toolbar
+      .md-toolbar-tools
+        h3 haha
+    md-content
+      print-table(
+        data="bdcData"
+        resources="setup.resources"
+      )
