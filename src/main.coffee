@@ -12,12 +12,7 @@ angular.module '%module%', [
   'ang-drag-drop'
   'angular-datepicker'
   '%module%.utils'
-  # '%module%.home'
   '%module%.scrumboard'
   '%module%.setup'
   '%module%.user'
-  # '%module%.mepgraph'
-  # '%module%.trello'
-  # '%module%.burndown'
-  # '%module%.bdc'
 ]
