@@ -20,22 +20,26 @@
     stroke: rgba(0,0,0,0);
   }
 
-  rect {
+  path {
+    &.standard {
+      stroke: @bdcgraph-standard-color;
+      stroke-dasharray: 10 5;
+    }
+  }
+  .tick text, text {
+    fill: @bdcgraph-default-color;
+    &.standard-legend, &.jh-legend, &.jhmep-legend {
+      fill: @bdcgraph-default-color;
+    }
+  }
 
-    &.background {
-      fill: @bdcgraph-bg-color;
-    }
-    &.ratio {
+  rect, text {
+
+    &.done {
       fill: @bdcgraph-fg-color;
     }
-    &.standard-legend {
+    &.standard {
       fill: @bdcgraph-standard-color;
-    }
-    &.jh-legend {
-      fill: @bdcgraph-bg-color;
-    }
-    &.jhmep-legend {
-      fill: @bdcgraph-fg-color;
     }
   }
 
@@ -51,17 +55,5 @@
     }
   }
 
-  path {
-    &.standard {
-      stroke: @bdcgraph-standard-color;
-      stroke-dasharray: 10 5;
-    }
-  }
-  .tick text, text {
-    fill: @bdcgraph-default-color;
-    &.standard-legend, &.jh-legend, &.jhmep-legend {
-      fill: @bdcgraph-default-color;
-    }
-  }
 
 }

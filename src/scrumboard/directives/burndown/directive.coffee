@@ -15,18 +15,17 @@ angular.module '%module%.scrumboard'
     height = whRatio * width
 
     config =
-      width: width#window.innerWidth - 50
-      height: height#window.innerHeight * 0.6
+      width: width
+      height: height
       margins:
-        top: 70
+        top: 20
         right: 70
         bottom: 20
         left: 50
       tickSize: 5
       color:
-        standard: '#D93F8E'
-        foreground: '#5AA6CB'
-        background: '#F2F2F2'
+        standard: '#D93F8E' # default colors
+        done: '#5AA6CB'
 
     bdcgraph = d3.select '#bdcgraph'
 
@@ -57,7 +56,7 @@ angular.module '%module%.scrumboard'
       ]
       .domain [
         d3.min data, (d, i) ->
-          d.standard - 10
+          (Math.min d.standard, d.left) - 1
         d3.max data, (d, i) ->
           d.standard + 4
       ]
@@ -98,7 +97,7 @@ angular.module '%module%.scrumboard'
       vis.append 'svg:path'
       .attr 'class', 'axis'
       .attr 'd', drawZero data
-      .attr 'stroke', cfg.color.foreground
+      .attr 'stroke', cfg.color.done
       .attr 'stroke-width', 1
       .attr 'fill', 'none'
 
@@ -213,7 +212,7 @@ angular.module '%module%.scrumboard'
           return unless d.left?
           yRange d.left
         .attr 'r', 4
-        .attr 'fill', cfg.color.foreground
+        .attr 'fill', cfg.color.done
 
 
       drawValues = (color) ->
@@ -235,7 +234,7 @@ angular.module '%module%.scrumboard'
           xRange i + 1
         .attr 'y', (d) ->
           - 10 + yRange(Math.max(d.standard, d.left))
-        .attr 'fill', cfg.color.foreground
+        .attr 'fill', cfg.color.done
         .attr 'text-anchor', 'start'
         .text (d) ->
           if d.diff >= 0
@@ -243,80 +242,8 @@ angular.module '%module%.scrumboard'
           else
             return d.diff.toPrecision(2) + ' :('
 
-      drawLegends = (standardValue) ->
-        sizes =
-          width: 20
-          height: 20
-          margin: 10
-          offsetLeft: 20
-          lineheight: 20
-          colWidth: 180
-
-        # Standard
-        vis.append 'rect'
-        .attr 'class', 'standard-legend'
-        .attr 'width', sizes.width
-        .attr 'height', sizes.height
-        .attr 'fill', cfg.color.standard
-        .attr 'stroke', 'none'
-        .attr 'x', sizes.offsetLeft + cfg.margins.right * 3
-        .attr 'y', sizes.margin
-        .attr 'dy', '20px'
-
-        vis.append 'text'
-        .attr 'class', 'standard-legend'
-        .attr 'stroke', 'none'
-        .attr 'fill', cfg.color.standard
-        .attr 'x', sizes.offsetLeft + sizes.margin + sizes.width + cfg.margins.right * 3
-        .attr 'y', 0
-        .attr 'dy', '1.6em'
-        .style 'text-anchor', 'start'
-        .text 'Standard : ' + standardValue * 100 + '%JH'
-
-        # JH
-        vis.append 'rect'
-        .attr 'class', 'jh-legend'
-        .attr 'width', sizes.width
-        .attr 'height', sizes.height
-        .attr 'fill', cfg.color.background
-        .attr 'stroke', 'none'
-        .attr 'x', sizes.offsetLeft + cfg.margins.right * 3
-        .attr 'y', sizes.margin * 2 + sizes.lineheight
-        .attr 'dy', '20px'
-
-        vis.append 'text'
-        .attr 'class', 'jh-legend'
-        .attr 'stroke', 'none'
-        .attr 'fill', cfg.color.background
-        .attr 'x', sizes.offsetLeft + sizes.margin + sizes.width + cfg.margins.right * 3
-        .attr 'y', sizes.margin + sizes.lineheight
-        .attr 'dy', '1.6em'
-        .style 'text-anchor', 'start'
-        .text 'Ressources en JH'
-
-        # MEP
-        vis.append 'rect'
-        .attr 'class', 'jhmep-legend'
-        .attr 'width', sizes.width
-        .attr 'height', sizes.height
-        .attr 'fill', cfg.color.foreground
-        .attr 'stroke', 'none'
-        .attr 'x', sizes.offsetLeft + cfg.margins.right * 3 + sizes.colWidth
-        .attr 'y', sizes.margin * 2 + sizes.lineheight
-        .attr 'dy', '20px'
-
-        vis.append 'text'
-        .attr 'class', 'jhmep-legend'
-        .attr 'stroke', 'none'
-        .attr 'fill', cfg.color.foreground
-        .attr 'x', sizes.offsetLeft + sizes.margin + sizes.colWidth + sizes.width + cfg.margins.right * 3
-        .attr 'y', sizes.margin + sizes.lineheight
-        .attr 'dy', '1.6em'
-        .style 'text-anchor', 'start'
-        .text '- dont JH pour MEP'
-
       drawStandardLine cfg.color.standard
-      drawDoneLine cfg.color.foreground
+      drawDoneLine cfg.color.done
       drawValues()
 
     scope.$watch 'data', (data) ->
