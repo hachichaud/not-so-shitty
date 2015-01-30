@@ -5,3 +5,5 @@ angular.module '%module%.scrumboard'
   $scope.setup = storage.setup
 
   $scope.bdcData = BurndownData.generateData doneCards, storage.setup.dates.days, storage.setup.resources, false
+
+  $scope.showTable = false

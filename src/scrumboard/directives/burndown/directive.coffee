@@ -1,33 +1,39 @@
 angular.module '%module%.scrumboard'
-.directive 'burndown', ($filter) ->
+.directive 'burndown', ->
   restrict: 'AE'
   scope:
     data: '='
   templateUrl: 'scrumboard/directives/burndown/view.html'
   link: (scope, elem, attr) ->
-    maxWidth = 1000
+    maxWidth = 1200
     whRatio = 0.54
+    computeDimensions = ->
+      if window.innerWidth > maxWidth
+        width = (window.innerWidth) * 0.66 #magic
+        # width -= window.innerWidth / 10
+      else
+        width = (window.innerWidth - 50)
+      height = whRatio * width
+      config =
+        width: width
+        height: height
+        margins:
+          top: 20
+          right: 70
+          bottom: 20
+          left: 50
+        tickSize: 5
+        color:
+          standard: '#D93F8E' # default colors
+          done: '#5AA6CB'
+      config
 
-    if (window.innerWidth - 50) > maxWidth
-      width = (window.innerWidth) * 2 / 3
-    else
-      width = (window.innerWidth - 50)
-    height = whRatio * width
-
-    config =
-      width: width
-      height: height
-      margins:
-        top: 20
-        right: 70
-        bottom: 20
-        left: 50
-      tickSize: 5
-      color:
-        standard: '#D93F8E' # default colors
-        done: '#5AA6CB'
-
+    config = computeDimensions()
     bdcgraph = d3.select '#bdcgraph'
+
+    window.onresize = ->
+      config = computeDimensions()
+      render scope.data, config
 
     render = (data, cfg) ->
       bdcgraph.select '*'

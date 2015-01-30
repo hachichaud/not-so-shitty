@@ -1,24 +1,37 @@
-h1 Scrumboard
-a(
-  ui-sref="setup"
-) setup
-
-md-content.md-padding(
-  layout="column"
-  layout-align="center center"
-  md-theme="blue"
+md-toolbar.md-whiteframe-z1(
+  md-theme="green"
 )
-  md-whiteframe.md-whiteframe-z2
-    md-toolbar
-      .md-toolbar-tools
-        h3 BDC
-    md-content
-      burndown(
-        data="bdcData"
-      )
-
-  md-card
-    md-content
+  .md-toolbar-tools
+    h1 Burndown Chart
+    md-button.md-raised(
+      aria-label="Setup"
+      ui-sref="setup"
+    )
+      i.fa.fa-cog
+md-content.md-padding(
+  layout-gt-lg="row"
+  layout="column"
+  layout-align="space-around center"
+)
+  .left(
+    flex-gt-lg="66"
+  )
+    .md-whiteframe-z2
+      .bdc
+        md-toolbar
+          .md-toolbar-tools
+            span(bdc-summary, resources="setup.resources")
+        burndown(
+          data="bdcData"
+        )
+  
+  .right(
+    ng-if="showTable"
+    flex-gt-lg="33"
+    layout
+    layout-align="center"
+  )
+    .md-whiteframe-z1
       print-table(
         data="bdcData"
         resources="setup.resources"
