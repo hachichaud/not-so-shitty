@@ -3,6 +3,16 @@ angular.module '%module%.scrumboard'
 ($http, $q, trello, storage) ->
   doneListCards = undefined
 
+  getCards = (listId) ->
+    return unless listId
+    $http
+      method: 'get'
+      url: trello.apiUrl + '/lists/' + listId + '/cards'
+      params:
+        key: trello.applicationKey
+        token: storage.token
+    .then (res) ->
+      res.data
   getMovedCardDate = (cardId) ->
     return unless cardId
     $http
@@ -39,3 +49,4 @@ angular.module '%module%.scrumboard'
         res.data
 
   getDoneCards: getDoneCards
+  getCards: getCards

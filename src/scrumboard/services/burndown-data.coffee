@@ -73,3 +73,4 @@ angular.module '%module%.scrumboard'
     data
 
   generateData: generateData
+  getCardPoints: getCardPoints

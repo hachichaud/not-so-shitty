@@ -16,23 +16,38 @@ md-toolbar.md-whiteframe-z1.md-hue-3.md-primary
     i.fa.fa-cog
   .burndown(
     flex
-    layout-gt-lg="row"
     layout="column"
     layout-align="space-around center"
   )
-    .md-whiteframe-z2
-      .bdc
-        md-toolbar
-          .md-toolbar-tools
-            span(bdc-summary, resources="setup.resources")
-        .widgets(
-          layout-gt-lg="row"
-          layout="column"
+    .md-whiteframe-z2.scrumboard-section
+      md-toolbar
+        .md-toolbar-tools
+          span(bdc-summary, resources="setup.resources")
+      .widgets(
+        layout-gt-lg="row"
+        layout="column"
+        layout-align="center center"
+        layout-margin
+      )
+        burndown(
+          data="bdcData"
         )
-          burndown(
-            data="bdcData"
-          )
-          print-table(
-            data="bdcData"
-            resources="setup.resources"
-          )
+        print-table(
+          data="bdcData"
+          resources="setup.resources"
+        )
+    //- .md-whiteframe-z2.scrumboard-section(
+    //-   layout-fill
+    //-   layout="column"
+    //- )
+    //-   md-toolbar.md-accent
+    //-     .md-toolbar-tools
+    //-       span Blop
+    //-   .widgets(
+    //-     layout-gt-lg="row"
+    //-     layout="column"
+    //-     layout-align="center center"
+    //-     layout-margin
+    //-   )
+    //-     md-card.widget
+    //-       | yolo

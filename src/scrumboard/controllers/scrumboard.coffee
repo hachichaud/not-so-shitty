@@ -1,6 +1,6 @@
 angular.module '%module%.scrumboard'
 .controller 'ScrumBoardCtrl',
-($scope, doneCards, storage, BurndownData) ->
+($scope, doneCards, storage, BurndownData, ScrumBoard) ->
   $scope.doneCards = doneCards
   $scope.setup = storage.setup
 

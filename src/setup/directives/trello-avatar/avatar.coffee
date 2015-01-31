@@ -13,6 +13,7 @@ angular.module '%module%.setup'
       res.data
 
   getMember = (memberId) ->
+    return unless memberId
     getMemberFromTrello memberId
     .then (member) ->
       if member.uploadedAvatarHash

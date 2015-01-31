@@ -14,7 +14,6 @@ angular.module '%module%.scrumboard'
         width = (window.innerWidth - 80)
       height = whRatio * width
       if height + 128 > window.innerHeight
-        console.log window.innerHeight, height
         height = window.innerHeight - 128
         width = height / whRatio
       config =
