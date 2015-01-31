@@ -5,15 +5,18 @@ angular.module '%module%.scrumboard'
     data: '='
   templateUrl: 'scrumboard/directives/burndown/view.html'
   link: (scope, elem, attr) ->
-    maxWidth = 1200
+    maxWidth = 1000
     whRatio = 0.54
     computeDimensions = ->
       if window.innerWidth > maxWidth
-        width = (window.innerWidth) * 0.66 #magic
-        # width -= window.innerWidth / 10
+        width = 800
       else
-        width = (window.innerWidth - 50)
+        width = (window.innerWidth - 80)
       height = whRatio * width
+      if height + 128 > window.innerHeight
+        console.log window.innerHeight, height
+        height = window.innerHeight - 128
+        width = height / whRatio
       config =
         width: width
         height: height

@@ -16,3 +16,15 @@ angular.module '%module%', [
   '%module%.setup'
   '%module%.user'
 ]
+.config ($mdThemingProvider) ->
+  $mdThemingProvider.theme('blue')
+    .primaryPalette 'blue',
+      'default': '400'
+      'hue-1': '100'
+      'hue-2': '600'
+      'hue-3': '900'
+    .accentPalette 'purple',
+      'default': '500'
+      'hue-1': '100'
+      'hue-2': '600'
+      'hue-3': '800'

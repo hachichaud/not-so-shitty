@@ -1,38 +1,38 @@
-md-toolbar.md-whiteframe-z1(
-  md-theme="green"
-)
+md-toolbar.md-whiteframe-z1.md-hue-3.md-primary
   .md-toolbar-tools
     h1 Burndown Chart
-    md-button.md-raised(
-      aria-label="Setup"
-      ui-sref="setup"
-    )
-      i.fa.fa-cog
-md-content.md-padding(
-  layout-gt-lg="row"
+
+
+.container(
   layout="column"
-  layout-align="space-around center"
+  layout-fill
+  layout-align="center center"
 )
-  .left(
-    flex-gt-lg="66"
+  md-button.md-fab.md-hue-3.main-button(
+    aria-label="Setup"
+    md-theme="blue"
+    ui-sref="setup"
+  )
+    i.fa.fa-cog
+  .burndown(
+    flex
+    layout-gt-lg="row"
+    layout="column"
+    layout-align="space-around center"
   )
     .md-whiteframe-z2
       .bdc
         md-toolbar
           .md-toolbar-tools
             span(bdc-summary, resources="setup.resources")
-        burndown(
-          data="bdcData"
+        .widgets(
+          layout-gt-lg="row"
+          layout="column"
         )
-  
-  .right(
-    ng-if="showTable"
-    flex-gt-lg="33"
-    layout
-    layout-align="center"
-  )
-    .md-whiteframe-z1
-      print-table(
-        data="bdcData"
-        resources="setup.resources"
-      )
+          burndown(
+            data="bdcData"
+          )
+          print-table(
+            data="bdcData"
+            resources="setup.resources"
+          )
