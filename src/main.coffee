@@ -26,5 +26,5 @@ angular.module '%module%', [
     .accentPalette 'purple',
       'default': '500'
       'hue-1': '100'
-      'hue-2': '600'
+      'hue-2': 'A700'
       'hue-3': '800'

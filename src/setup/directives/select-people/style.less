@@ -1,11 +1,13 @@
 select-people {
+  @select-color: rgb(170,0,255);
   .member-select {
     display: inline-block;
     input[type="checkbox"] {
       display: none;
     }
+    border-bottom: transparent solid 3px;
     &.selected {
-      border-bottom: red solid 3px;
+      border-bottom: @select-color solid 3px;
       // background-color: red;
     }
     label {

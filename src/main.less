@@ -16,5 +16,22 @@
 
 .main-view, .container {
   background-color: rgb(240, 241, 245);
-
+}
+.container {
+  margin-top: 64px;
+}
+.page-header {
+  position: fixed;
+  top: 0;
+  z-index: 15;
+}
+.main-button {
+  top: 34px;
+  right: 6px;
+  @media only screen and (min-width : 1000px) {
+    right: 34px;
+  }
+  bottom: auto;
+  left: auto;
+  position: fixed;
 }

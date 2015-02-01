@@ -127,6 +127,11 @@ angular.module '%module%.setup'
     .then (res) ->
       res.data
 
+  clearTeam = ->
+    storage.setup.team.dev = []
+    storage.setup.team.rest = []
+
+  clearTeam: clearTeam
   getBoards: getBoards
   getBoardColumns: getBoardColumns
   getBoardMembers: getBoardMembers

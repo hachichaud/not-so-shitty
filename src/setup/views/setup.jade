@@ -1,62 +1,71 @@
-md-content.md-padding
-  h1 Setup
-  a.md-button.md-raised.md-primary(
-    ui-sref="scrumboard"
-  ) To BDC
-.setup(
-  layout-fill
+md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
+  .md-toolbar-tools
+    h1 Setup
+    
+    
+.container(
   layout="column"
-  layout-gt-md="row"
+  layout-fill
+  layout-align="center center"
 )
-  div(
-    layout-fill
-    layout="column"
+  md-button.md-fab.md-hue-3.main-button(
+    aria-label="Setup"
+    md-theme="blue"
+    ui-sref="scrumboard"
   )
-    md-toolbar
-      .md-toolbar-tools
-        h4 Board
-    md-content.md-padding
-      select-board(
-        boards="boards"
-        board-id="setup.boardId"
-      )
-    md-toolbar(md-theme="orange")
-      .md-toolbar-tools
-        h4 Columns
-    md-content.md-padding(md-theme="orange")
-      select-columns(
-        board-columns="boardColumns"
-        column-ids="setup.columnIds"
-      )
-    md-toolbar(
-      md-theme="blue"
-    )
-      .md-toolbar-tools
-        h4 Save setup
-    md-content.md-padding(
-      md-theme="blue"
-    )
-      h4 Save to trello card
-      select-card(
-        columns="boardColumns"
-        card-id="setup.saveCardId"
-      )
-      save-to-trello(
-        card-id="setup.saveCardId"
-        data="setup"
-      )
-  div(
-    layout-fill
+    i.fa.fa-line-chart
+
+  .setup(
+    flex
     layout="column"
-    md-theme="purple"
+    layout-gt-md="row"
   )
-    md-toolbar
-      .md-toolbar-tools
-        h4 Resources
-    md-content
-      resources-widget(
-        board-members="boardMembers"
-        team="setup.team"
-        dates="setup.dates"
-        resources="setup.resources"
+    div(
+      layout-fill
+      layout="column"
+    )
+      md-toolbar.md-hue-2
+        .md-toolbar-tools
+          h4 Board
+      md-content.md-padding.md-whiteframe-z2
+        select-board(
+          boards="boards"
+          board-id="setup.boardId"
+        )
+      md-toolbar.md-accent
+        .md-toolbar-tools
+          h4 Columns
+      md-content.md-padding.md-whiteframe-z2
+        select-columns(
+          board-columns="boardColumns"
+          column-ids="setup.columnIds"
+        )
+      md-toolbar.md-hue-2
+        .md-toolbar-tools
+          h4 Save setup
+      md-content.md-padding.md-whiteframe-z2(
+        md-theme="blue"
       )
+        h4 Save to trello card
+        select-card(
+          columns="boardColumns"
+          card-id="setup.saveCardId"
+        )
+        save-to-trello(
+          card-id="setup.saveCardId"
+          data="setup"
+        )
+    div(
+      layout-fill
+      layout="column"
+    )
+      md-toolbar.md-accent.md-hue-2
+        .md-toolbar-tools
+          h4 Resources
+      md-content.md-whiteframe-z2
+        resources-widget(
+          board-members="boardMembers"
+          team="setup.team"
+          dates="setup.dates"
+          resources="setup.resources"
+        )

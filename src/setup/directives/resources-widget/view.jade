@@ -13,6 +13,12 @@ md-content.team-composition.md-padding
         ng-repeat="id in team.rest"
         member-id="{{id}}"
       )
+  md-button.md-accent(
+    ng-click="clearTeam()"
+  ) 
+    span
+      i.fa.fa-trash
+    span  Clear
   .select-teams(
     layout="row"
   )

@@ -11,6 +11,8 @@ angular.module '%module%.setup'
 
   $scope.$watch 'selectedMembers', (newVal) ->
     return unless newVal
-    $scope.teamCheck ?= {}
-    for member in $scope.selectedMembers
-      $scope.teamCheck[member] = true
+    if newVal.length > 0
+      $scope.teamCheck ?= {}
+      for member in $scope.selectedMembers
+        $scope.teamCheck[member] = true
+    else $scope.teamCheck = {}

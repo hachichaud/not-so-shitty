@@ -2,7 +2,8 @@ angular.module '%module%.setup'
 .controller 'ResourcesWidgetCtrl',
 ($scope, Setup) ->
   $scope.datePattern = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/
-
+  $scope.clearTeam = ->
+    Setup.clearTeam()
   generateDayList = (start, end) ->
     return unless start and end
     # check if start < end
