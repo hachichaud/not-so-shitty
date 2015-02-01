@@ -1,6 +1,20 @@
 angular.module '%module%.scrumboard'
 .factory 'DailyReport',
 ($http, storage, trello) ->
+  putCardAtTopPosition = (cardId) ->
+    return unless cardId
+    $http
+      method: 'put'
+      url: trello.apiUrl + '/cards/' + cardId + '/pos'
+      headers:
+        'Content-Type': undefined
+      params:
+        key: trello.applicationKey
+        token: storage.token
+        value: 'top'
+    .then (res) ->
+      res.data
+
   # using same data as BurnDown chart
   createDailyDesc = (data) ->
     return unless data
@@ -45,6 +59,8 @@ angular.module '%module%.scrumboard'
           name: 'BurnDown Chart - ' + today.toLocaleDateString()
           mimeType: 'image/png'
     }
+    .then (res) ->
+      res.data
 
   dataURItoBlob = (dataURI) ->
     # convert base64/URLEncoded data component to raw binary data held in a string
@@ -90,3 +106,4 @@ angular.module '%module%.scrumboard'
   postGraphToTrello: postGraphToTrello
   createDailyReportCard: createDailyReportCard
   createDailyDesc: createDailyDesc
+  putCardAtTopPosition: putCardAtTopPosition
