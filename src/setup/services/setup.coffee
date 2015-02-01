@@ -104,6 +104,7 @@ angular.module '%module%.setup'
         delete storage.trelloCardId
         storage.setup = JSON.parse desc
         getMyBoards()
+    else getMyBoards()
 
 
   getBoardColumns = (boardId) ->
