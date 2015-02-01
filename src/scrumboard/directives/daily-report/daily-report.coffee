@@ -1,6 +1,6 @@
 angular.module '%module%.scrumboard'
 .factory 'DailyReport',
-($http, storage, trello) ->
+($http, $state, storage, trello) ->
   putCardAtTopPosition = (cardId) ->
     return unless cardId
     $http

@@ -8,6 +8,7 @@ angular.module '%module%.scrumboard'
   controller: ($scope, ScrumBoard, DailyReport) ->
     $scope.createDailyReport = ->
       cardId = undefined
+      # console.log $scope.dailyColumnId
       dailyReport = DailyReport.createDailyDesc $scope.data
       DailyReport.createDailyReportCard $scope.dailyColumnId, dailyReport
       .then (card) ->
