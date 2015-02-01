@@ -88,12 +88,16 @@ angular.module '%module%.scrumboard'
       vis.append 'svg:g'
       .attr 'class', 'x axis'
       .attr 'transform', 'translate(0,' + (yRange(0)) + ')'
+      .attr 'fill', '#000000'
       .call xAxis
 
       vis.append 'svg:g'
       .attr 'class', 'y axis'
       .attr 'transform', 'translate(' + (cfg.margins.left) + ',0)'
+      .attr 'fill', '#000000'
       .call yAxis
+
+      d3.selectAll('.tick text').attr('font-size', '16px')
 
       drawZero = d3.svg.line()
       .x (d, i) ->
@@ -108,51 +112,6 @@ angular.module '%module%.scrumboard'
       .attr 'stroke', cfg.color.done
       .attr 'stroke-width', 1
       .attr 'fill', 'none'
-
-      # color: string
-      drawBars = (type, color, textColor) ->
-        vis.selectAll 'rect .' + type
-        .data data
-        .enter()
-        .append 'rect'
-        .attr 'class', type
-        .attr 'x', (d) ->
-          xRange d.week
-        .attr 'y', (d) ->
-          if type is 'ratio'
-            yRange d.ratio
-          else
-            yRange 1
-        .attr 'width', xRange.rangeBand()
-        .attr 'height', (d) ->
-          if type is 'ratio'
-            (cfg.height - cfg.margins.bottom) - yRange d.ratio
-          else
-            (cfg.height - cfg.margins.bottom) - yRange 1
-        .attr 'fill', color
-
-        vis.selectAll 'text.' + type
-        .data data
-        .enter()
-        .append 'text'
-        .attr 'class', type
-        .attr 'stroke', 'none'
-        .attr 'fill', textColor
-        .attr 'x', (d) ->
-          xRange ( d.week )
-        .attr 'y', (d) ->
-          if type is 'ratio'
-            yRange d.ratio
-          else
-            yRange 1
-        .attr 'dy', '1.6em'
-        .attr 'dx', xRange.rangeBand() - 10
-        .style 'text-anchor', 'end'
-        .text (d) ->
-          if type is 'ratio'
-            d.MEP
-          else
-            d.JH
 
       # DRAW STANDARD
       drawStandardLine = (color) ->
@@ -233,6 +192,7 @@ angular.module '%module%.scrumboard'
         .enter()
         .append 'text'
         .attr 'class', 'done-values'
+        .attr 'font-size', '16px'
         .attr 'class', (d) ->
           if d.diff >= 0
             'good done-values'

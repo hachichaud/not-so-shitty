@@ -19,6 +19,10 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
     layout="column"
     layout-align="space-around center"
   )
+    md-button(
+      ng-click="export()"
+    ) export
+    div {{img}}
     .md-whiteframe-z2.scrumboard-section
       md-toolbar
         .md-toolbar-tools
