@@ -57,7 +57,8 @@ angular.module '%module%.setup'
     .then (res) ->
       res.data
 
-  getBoards = ->
+
+  getMyBoards = ->
     $http
       method: 'get'
       url: trello.url + '/members/me/boards'
@@ -66,6 +67,25 @@ angular.module '%module%.setup'
         token: storage.token
     .then (res) ->
       res.data
+
+  getCardDesc = (cardId) ->
+    $http
+      method: 'get'
+      url: trello.apiUrl + '/cards/' + cardId + '/desc'
+      params:
+        key: trello.applicationKey
+        token: storage.token
+    .then (res) ->
+      res?.data?._value
+
+  getBoards = ->
+    if storage.trelloCardId
+      getCardDesc storage.trelloCardId
+      .then (desc) ->
+        delete storage.trelloCardId
+        storage.setup = JSON.parse desc
+        getMyBoards()
+
 
   getBoardColumns = (boardId) ->
     $http

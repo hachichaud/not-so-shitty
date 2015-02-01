@@ -10,7 +10,11 @@ angular.module '%module%.user'
   loginReturnUrl = $state.href 'login', {}, { absolute: true }
   loginUrl = authUrl + '&return_url=' + loginReturnUrl
 
-  retrieveToken = (event) ->
+  retrieveCardId = (toParams) ->
+    if toParams?.cardId
+      storage.trelloCardId = toParams.cardId
+
+  retrieveToken = (event, toParams) ->
     if /#token=/.test location.href
       storage.token = location.href.replace /.*#token=(.*)/, '$1'
     if storage.token
@@ -18,4 +22,5 @@ angular.module '%module%.user'
       $state.go 'setup'
 
   retrieveToken: retrieveToken
+  retrieveCardId: retrieveCardId
   loginUrl: loginUrl
