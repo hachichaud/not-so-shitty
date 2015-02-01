@@ -100,6 +100,7 @@ angular.module '%module%.scrumboard'
 
     fd = new FormData document.forms[0]
     fd.append 'file', blob, 'image.png'
+    canvas.parentNode.removeChild(canvas)
     fd
 
   getFormDataFromSvg: getFormDataFromSvg
