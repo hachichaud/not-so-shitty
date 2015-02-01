@@ -3,30 +3,6 @@ angular.module '%module%.scrumboard'
 ($http, $q, trello, storage) ->
   doneListCards = undefined
 
-  testtest = (formData) ->
-    console.log formData
-    uploadUrl = trello.apiUrl + '/cards/' + 'xirop5XL' + '/attachments'
-    $http.post uploadUrl, formData, {
-        transformRequest: angular.identity,
-        headers: 'Content-Type': undefined
-        params:
-          key: trello.applicationKey
-          token: storage.token
-          name: 'Testimage'
-          mimeType: 'image/png'
-    }
-    # $http
-    #   method: 'post'
-    #   url: trello.apiUrl + '/cards/' + 'xirop5XL' + '/attachments'
-    #   headers:
-    #     'Content-Type': undefined
-    #   params:
-    #     key: trello.applicationKey
-    #     token: storage.token
-    #     name: 'Testimage'
-    #     mimeType: 'image/png'
-    #     file: formData
-
   getCards = (listId) ->
     return unless listId
     $http
@@ -74,4 +50,3 @@ angular.module '%module%.scrumboard'
 
   getDoneCards: getDoneCards
   getCards: getCards
-  testtest: testtest

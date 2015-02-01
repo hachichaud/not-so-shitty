@@ -96,8 +96,9 @@ angular.module '%module%.scrumboard'
       .attr 'transform', 'translate(' + (cfg.margins.left) + ',0)'
       .attr 'fill', '#000000'
       .call yAxis
-
-      d3.selectAll('.tick text').attr('font-size', '16px')
+      # this in order for svg to canvas to work
+      d3.selectAll '.tick text'
+      .attr 'font-size', '16px'
 
       drawZero = d3.svg.line()
       .x (d, i) ->
