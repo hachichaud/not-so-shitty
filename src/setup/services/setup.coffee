@@ -1,6 +1,6 @@
 angular.module '%module%.setup'
 .factory 'Setup',
-($http, storage, trello) ->
+($http, $state, storage, trello) ->
   getTotalManDays = (matrix) ->
     total = 0
     for line in matrix
@@ -15,6 +15,23 @@ angular.module '%module%.setup'
     return unless totalManDays > 0
     totalPoints / totalManDays
 
+  postLink = (cardId) ->
+    return unless cardId
+    link = getShareLink cardId
+    $http
+      method: 'post'
+      url: trello.apiUrl + '/cards/' + cardId + '/attachments'
+      headers:
+        'Content-Type': undefined
+      params:
+        key: trello.applicationKey
+        token: storage.token
+        url: link
+        name: 'Link to Burndown Chart'
+
+  getShareLink = (cardId) ->
+    $state.href 'login', { cardId: cardId}, { absolute: true }
+
   saveToCard = (cardId, data) ->
     $http
       method: 'put'
@@ -25,6 +42,8 @@ angular.module '%module%.setup'
         key: trello.applicationKey
         token: storage.token
         value: JSON.stringify data
+    .then ->
+      postLink cardId
 
   getCard = (cardId) ->
     return unless cardId
