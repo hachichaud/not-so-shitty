@@ -18,10 +18,6 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
     layout="column"
     layout-align="space-around center"
   )
-    daily-report(
-      data="bdcData"
-      daily-column-id="setup.columnIds.done"
-    )
     .md-whiteframe-z2.scrumboard-section
       md-toolbar
         .md-toolbar-tools
@@ -37,4 +33,8 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
         )
         print-table(
           data="bdcData"
+        )
+        daily-report(
+          data="bdcData"
+          daily-column-id="setup.columnIds.done"
         )
