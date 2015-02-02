@@ -32,10 +32,11 @@ angular.module '%module%.scrumboard'
     dailyReport
 
   createDailyReportCard = (columnId, dailyReportDesc) ->
+    return unless columnId
     today = new Date()
     $http
       method: 'post'
-      url: trello.apiUrl + '/lists/' + '54c3ab771249457153f6d357' + '/cards'
+      url: trello.apiUrl + '/lists/' + columnId + '/cards'
       headers:
         'Content-Type': undefined
       params:
