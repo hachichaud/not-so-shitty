@@ -64,7 +64,9 @@ angular.module '%module%.scrumboard'
       ]
       .domain [
         d3.min data, (d, i) ->
-          (Math.min d.standard, d.left) - 1
+          if d.left
+            (Math.min d.standard, d.left) - 1
+          else d.standard - 1
         d3.max data, (d, i) ->
           d.standard + 4
       ]
