@@ -4,6 +4,12 @@ angular.module '%module%.scrumboard'
   $scope.doneCards = doneCards
   $scope.setup = storage.setup
 
-  $scope.bdcData = BurndownData.generateData doneCards, storage.setup.dates.days, storage.setup.resources, false
+  showDayPlusOne = false
+
+  $scope.bdcData = BurndownData.generateData doneCards, storage.setup.dates.days, storage.setup.resources, showDayPlusOne
+
+  $scope.toggleDayPlusOne = ->
+    showDayPlusOne = !showDayPlusOne
+    $scope.bdcData = BurndownData.generateData doneCards, storage.setup.dates.days, storage.setup.resources, showDayPlusOne
 
   $scope.showTable = false
