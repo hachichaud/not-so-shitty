@@ -28,16 +28,26 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
         layout-align="center center"
         layout-margin
       )
-        burndown(
-          data="bdcData"
+        .col
+          burndown(
+            data="bdcData"
+          )
+        .col(
+          layout="column"
+          layout-align="center center"
+          layout-margin
         )
-        print-table(
-          data="bdcData"
-        )
-        daily-report(
-          data="bdcData"
-          daily-column-id="setup.columnIds.done"
-        )
-        md-button(
-          ng-click="toggleDayPlusOne()"
-        ) J + 1
+          print-table(
+            data="bdcData"
+          )
+          .actions
+            md-button.md-fab.md-primary.md-hue-3
+              div(
+                daily-report
+                data="bdcData"
+                daily-column-id="setup.columnIds.done"
+              )
+                i.fa.fa-trello
+            md-button(
+              ng-click="toggleDayPlusOne()"
+            ) J + 1

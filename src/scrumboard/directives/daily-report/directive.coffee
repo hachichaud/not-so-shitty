@@ -1,6 +1,7 @@
 angular.module '%module%.scrumboard'
 .directive 'dailyReport', ->
-  restrict: 'AE'
+  restrict: 'A'
+  transclude: true
   scope:
     data: '='
     dailyColumnId: '='
