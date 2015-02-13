@@ -1,0 +1,95 @@
+md-content.team-composition.md-padding
+  .section-title Meet the team !
+  md-card(
+    layout="row"
+  )
+    .dev(flex)
+      trello-avatar(
+        ng-repeat="id in team.dev"
+        member-id="{{id}}"
+      )
+    .rest(flex)
+      trello-avatar(
+        ng-repeat="id in team.rest"
+        member-id="{{id}}"
+      )
+  md-button.md-accent(
+    ng-click="clearTeam()"
+  ) 
+    span
+      i.fa.fa-trash
+    span  Clear
+  .select-teams(
+    layout="row"
+  )
+    .select-dev-team(flex)
+      div Select the dev team
+      select-people(
+        members="boardMembers"
+        selected-members="team.dev"
+      )
+    .select-rest-team(flex) 
+      div Select the rest of the team
+      select-people(
+        members="boardMembers"
+        selected-members="team.rest"
+      )
+md-divider
+md-content.md-padding.days
+  .section-title Choose your sprint's start and end dates
+  .section-sub-title Format is YYYY-MM-DD
+  md-content(
+    layout="column"
+    layout-gt-lg="row"
+  )
+    label(flex)
+      span Start day
+      input(
+        type="text"
+        ng-model="dates.start"
+        ng-pattern="datePattern"
+      )
+    label(flex)
+      span End day
+      input(
+        type="text"
+        ng-pattern="datePattern"
+        ng-model="dates.end"
+      )
+md-divider
+md-content.man-days.md-padding(
+  ng-if="dates.days"
+  layout="column"
+) 
+  .section-title Setup your sprint resources
+  div(
+    layout="column"
+    layout-gt-lg="row"
+  )
+    md-card(flex)
+      .section-sub-title TOTAL MAN-DAYS : {{ resources.totalManDays }}
+      resources-by-day(
+        days="dates.days"
+        matrix="resources.matrix"
+        members="team.dev"
+      )
+    md-card(flex)
+      .section-sub-title Sprint points and speed :
+      .sprint-points
+        label
+          div Total sprint points
+          input(
+            type="number"
+            min="1"
+            step="1"
+            ng-model="resources.totalPoints"
+          )
+      .sprint-speed
+        label
+          div Sprint speed
+          input(
+            type="number"
+            min="0"
+            step="0.1"
+            ng-model="resources.speed"
+          )

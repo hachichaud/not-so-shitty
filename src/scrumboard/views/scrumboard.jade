@@ -1,0 +1,53 @@
+md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
+  .md-toolbar-tools
+    h1 Burndown Chart
+
+.container(
+  layout="column"
+  layout-fill
+  layout-align="center center"
+)
+  md-button.md-fab.md-hue-3.main-button(
+    aria-label="Setup"
+    md-theme="blue"
+    ui-sref="setup"
+  )
+    i.fa.fa-cog
+  .burndown(
+    flex
+    layout="column"
+    layout-align="space-around center"
+  )
+    .md-whiteframe-z2.scrumboard-section
+      md-toolbar
+        .md-toolbar-tools
+          span(bdc-summary, resources="setup.resources")
+      .widgets(
+        layout-gt-lg="row"
+        layout="column"
+        layout-align="center center"
+        layout-margin
+      )
+        .col
+          burndown(
+            data="bdcData"
+          )
+        .col(
+          layout="column"
+          layout-align="center center"
+          layout-margin
+        )
+          print-table(
+            data="bdcData"
+          )
+          .actions
+            md-button.md-fab.md-primary.md-hue-3
+              div(
+                daily-report
+                data="bdcData"
+                daily-column-id="setup.columnIds.done"
+              )
+                i.fa.fa-trello
+            md-button(
+              ng-click="toggleDayPlusOne()"
+            ) J + 1

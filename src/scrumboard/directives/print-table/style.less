@@ -1,0 +1,24 @@
+print-table {
+  min-width: 413px;//magic
+  @min-line-height: 30px;
+  @light-color: #dcedc8;
+
+  .row {
+    line-height: @min-line-height;
+    border-bottom: 1px solid @light-color;
+    span {
+      padding: 10px;
+    }
+  }
+  .column {
+    .row {
+      &:first-child {
+        border-bottom: 1px solid darken(@light-color, 0.5);
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+      text-align: right;
+    }
+  }
+}

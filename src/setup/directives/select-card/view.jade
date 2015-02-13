@@ -1,0 +1,15 @@
+h3 Selected Card : {{cardId}}
+p Select Column
+select(
+  name="selectCOlumn"
+  ng-options="column.id as column.name for column in columns"
+  ng-model="columnId"
+) 
+
+p(ng-show="chosenColumn") Select Card
+select(
+  ngif="chosenColumn"
+  name="selectCard"
+  ng-options="card.id as card.name for card in chosenColumn"
+  ng-model="cardId"
+)

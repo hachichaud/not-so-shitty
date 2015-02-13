@@ -1,13 +1,37 @@
 // Material themes
-@import (less) "../bower_components/angular-material/themes/orange-theme.css";
-@import (less) "../bower_components/angular-material/themes/deep-orange-theme.css";
-@import (less) "../bower_components/angular-material/themes/green-theme.css";
-@import (less) "../bower_components/angular-material/themes/light-blue-dark-theme.css";
-@import (less) "../bower_components/angular-material/themes/indigo-theme.css";
-@import (less) "../bower_components/angular-material/themes/yellow-theme.css";
-@import (less) "../bower_components/angular-material/themes/purple-theme.css";
-@import (less) "../bower_components/angular-material/themes/deep-purple-theme.css";
-@import (less) "../bower_components/angular-material/themes/amber-theme.css";
-@import (less) "../bower_components/angular-material/themes/blue-grey-theme.css";
-@import (less) "../bower_components/angular-material/themes/blue-theme.css";
-@import (less) "../bower_components/angular-material/themes/lime-theme.css";
+@import (less) "./themes/orange-theme.css";
+@import (less) "./themes/deep-orange-theme.css";
+@import (less) "./themes/green-theme.css";
+@import (less) "./themes/light-blue-dark-theme.css";
+@import (less) "./themes/indigo-theme.css";
+@import (less) "./themes/yellow-theme.css";
+@import (less) "./themes/purple-theme.css";
+@import (less) "./themes/deep-purple-theme.css";
+@import (less) "./themes/amber-theme.css";
+@import (less) "./themes/blue-grey-theme.css";
+@import (less) "./themes/blue-theme.css";
+@import (less) "./themes/lime-theme.css";
+@import (less) "./themes/cyan-theme.css";
+@import (less) "./themes/light-green-theme.css";
+
+.main-view, .container {
+  background-color: rgb(240, 241, 245);
+}
+.container {
+  margin-top: 64px;
+}
+.page-header {
+  position: fixed;
+  top: 0;
+  z-index: 15;
+}
+.main-button {
+  top: 34px;
+  right: 6px;
+  @media only screen and (min-width : 1000px) {
+    right: 34px;
+  }
+  bottom: auto;
+  left: auto;
+  position: fixed;
+}
