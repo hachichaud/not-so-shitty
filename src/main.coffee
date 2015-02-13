@@ -14,6 +14,7 @@ angular.module '%module%', [
   '%module%.utils'
   '%module%.scrumboard'
   '%module%.setup'
+  '%module%.pilot'
   '%module%.user'
 ]
 .config ($mdThemingProvider) ->

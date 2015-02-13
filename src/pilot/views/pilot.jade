@@ -1,0 +1,58 @@
+md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
+  .md-toolbar-tools
+    h1 Lucien's wonderful page
+    
+.container(
+  layout="column"
+  layout-fill
+  layout-align="center center"
+)
+  md-button.md-fab.md-hue-3.main-button(
+    aria-label="Gogo pilot"
+    md-theme="blue"
+  )
+    i.fa.fa-cog
+
+  .setup-pilot(
+    flex
+    layout="column"
+    layout-align="space-around center"
+  )
+    md-toolbar
+      .md-toolbar-tools
+        h4 Setup 
+    .md-whiteframe-z2      
+      div.choose-board(
+        ng-repeat="board in pilotSetup.boards track by $index"
+      )
+        select-board(
+          boards="boards"
+          board-id="board.id"
+        )
+      md-button(
+        ng-click="addBoard()"
+      ) +
+  .results-pilot(
+    flex
+    layout="column"
+    layout-align="space-around center"
+  )
+    md-toolbar
+      .md-toolbar-tools
+        h4 Nombre de retours et régressions
+    md-content.md-whiteframe-z2
+      div
+        .retour(
+          ng-repeat="board in pilotSetup.boards track by $index"
+          layout="row"
+        )
+          .col
+            trello-board(
+              board-id="{{board.id}}"
+            )
+          .col
+            simple-bar-chart(
+              data="[board.retours, board.regressions]"
+            )
+            .retour Retours : {{board.retours}}
+            .regression Regressions : {{board.regressions}}
