@@ -1,6 +1,6 @@
 angular.module '%module%.scrumboard'
 .controller 'ScrumBoardCtrl',
-($scope, doneCards, storage, BurndownData) ->
+($scope, doneCards, storage, BurndownData, $mdBottomSheet) ->
   $scope.doneCards = doneCards
   $scope.setup = storage.setup
 
@@ -13,3 +13,10 @@ angular.module '%module%.scrumboard'
     $scope.bdcData = BurndownData.generateData doneCards, storage.setup.dates.days, storage.setup.resources, showDayPlusOne
 
   $scope.showTable = false
+
+  $scope.openActions = ->
+    $mdBottomSheet.show
+      controller: 'BottomActionsCtrl'
+      locals:
+        bdcData: $scope.bdcData
+      templateUrl: 'scrumboard/views/bottom-actions.html'
