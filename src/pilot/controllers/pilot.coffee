@@ -17,3 +17,4 @@ angular.module '%module%.pilot'
     Pilot.getRegressions newVal
     .then (res) ->
       Pilot.getRetours newVal
+  , true

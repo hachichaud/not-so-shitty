@@ -13,6 +13,7 @@ angular.module '%module%.pilot'
 
   getLabels = (boardId) ->
     return unless boardId
+
     $http
       method: 'get'
       url: trello.apiUrl + '/boards/' + boardId + '/labels'
@@ -21,6 +22,33 @@ angular.module '%module%.pilot'
         token: storage.token
     .then (res) ->
       res.data
+
+  getNumRetours = (desc) ->
+    match = desc.match /retours?\(([-+]?[0-9]*.?[0-9]+)\)/i
+    value = 0
+    if match
+      for matchVal in match
+        value = parseFloat(matchVal, 10) unless isNaN(parseFloat(matchVal, 10))
+    value
+
+  getNumOfRetoursFromBoard = (boardId) ->
+    $http
+      method: 'get'
+      url: trello.apiUrl + '/boards/' + boardId + '/cards'
+      params:
+        key: trello.applicationKey
+        token: storage.token
+    .then (res) ->
+      retourCards = _.filter res.data, (card) ->
+        _.some card.labels, (label) ->
+          /retours?/i.test label.name
+      total = 0
+      for card in retourCards
+        total += getNumRetours card.desc
+      {
+        numRetourCards: retourCards.length
+        retours: total
+      }
 
   getBoardsLabels = (boards) ->
     return unless boards
@@ -49,10 +77,14 @@ angular.module '%module%.pilot'
 
   getRetours = (boards) ->
     return unless boards
-    getBoardsLabels boards
-    .then (boardLabels) ->
+    retours = []
+    for board in boards
+      retours.push getNumOfRetoursFromBoard board.id
+    $q.all retours
+    .then (boardRetours) ->
       for board, i in boards
-        board.retours = countLabels boardLabels[i], 'retour'
+        board.retours = boardRetours[i].retours
+        board.numRetourCards = boardRetours[i].numRetourCards
       boards
 
   getBoards: getBoards
