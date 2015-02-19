@@ -1,6 +1,51 @@
 angular.module '%module%.pilot'
 .factory 'Pilot',
 ($http, $q, storage, trello) ->
+
+  rodolphe = ->
+    # https://api.trello.com/1/boards/TaaVQeFt/cards?fields=dateLastActivity,name,idList&key=820fea551eb26ccde968e547a1c1ad4e&token=9a07356234c6f4c28d5e56c1a6f7fed9c7e61d6c8d5e05c04dc74d2b0146442f
+    toCsvResult = (jsonData) ->
+      stringCsv = ''
+      stringCsv = 'cardName;creationDate;lastActivity;list\n'
+      for card in jsonData
+        line = card.name + ';'
+        line += card.creation + ';'
+        line += card.dateLastActivity + ';'
+        line += card.list + '\n'
+        stringCsv += line
+      stringCsv
+    getCreationDate = (idCard) ->
+      return new Date(1000*parseInt(idCard.substring(0,8),16))
+
+    getListName = (idList) ->
+      $http
+        method: 'get'
+        url: trello.apiUrl + '/lists/' + idList
+        params:
+          key: trello.applicationKey
+          token: storage.token
+      .then (res) ->
+        res.data.name
+    allCards = []
+    $http
+      method: 'get'
+      url: trello.apiUrl + '/boards/' + 'TaaVQeFt' + '/cards'
+      params:
+        key: trello.applicationKey
+        token: storage.token
+        fields: 'dateLastActivity,name,idList'
+    .then (res) ->
+      for card in res.data
+        allCards.push getListName card.idList
+      $q.all allCards
+      .then (results) ->
+        for card, i in res.data
+          card.list = results[i] if results[i]?
+          card.creation = getCreationDate card.id
+        csvResult = toCsvResult res.data
+        console.log csvResult
+        csvResult
+
   getBoards = ->
     $http
       method: 'get'
@@ -90,3 +135,4 @@ angular.module '%module%.pilot'
   getBoards: getBoards
   getRegressions: getRegressions
   getRetours: getRetours
+  rodolphe: rodolphe

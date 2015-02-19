@@ -7,3 +7,10 @@ angular.module '%module%.pilot'
     controller: 'PilotCtrl'
     resolve:
       boards: (Pilot) -> Pilot.getBoards()
+  .state 'rodolphe',
+    url: '/rodolphe'
+    templateUrl: 'pilot/views/rodolphe.html'
+    controller: ($scope, csv) ->
+      $scope.csv = csv
+    resolve:
+      csv: (Pilot) -> Pilot.rodolphe()
