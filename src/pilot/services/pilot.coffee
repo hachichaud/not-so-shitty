@@ -3,7 +3,6 @@ angular.module '%module%.pilot'
 ($http, $q, storage, trello) ->
 
   rodolphe = ->
-    # https://api.trello.com/1/boards/TaaVQeFt/cards?fields=dateLastActivity,name,idList&key=820fea551eb26ccde968e547a1c1ad4e&token=9a07356234c6f4c28d5e56c1a6f7fed9c7e61d6c8d5e05c04dc74d2b0146442f
     toCsvResult = (jsonData) ->
       stringCsv = ''
       stringCsv = 'cardName;creationDate;lastActivity;list\n'
