@@ -13,18 +13,7 @@ npm start
 ```
 
 ### Fucking BDC how does it work ?
-
-#### Setup page
-- Click 'Setup' button
-- Follow link to generate trello key
-- Copy-paste trello key
-- Choose a board (from select, or copypaste trello board id)
-- Press OK
-- Drag and drop lists in corresponding slots (dont miss any)
-- Choose start and end date and save 'em
-- Check at the beginning of the page if everything looks ok, and SAVE
-
-Go to burndown page : yolo
+TODO
 
 #### If there are issues or weird stuff
 Clear local storage, start again
