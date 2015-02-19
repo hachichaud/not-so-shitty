@@ -13,6 +13,7 @@ angular.module '%module%.scrumboard'
         token: storage.token
     .then (res) ->
       res.data
+
   getMovedCardDate = (cardId) ->
     return unless cardId
     $http
