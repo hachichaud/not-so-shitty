@@ -9,16 +9,17 @@ angular.module '%module%.scrumboard'
         value = parseFloat(matchVal, 10) unless isNaN(parseFloat(matchVal, 10))
     value
 
-  getDoneBetweenDays = (doneCards, start, end, lastDay) ->
+  getDoneBetweenDays = (doneCards, start, end, lastDay, dailyHour) ->
     return unless end
+    dailyHour ?= 10
     # console.log 'getDoneBetweenDays :', start, end
     if lastDay
       endDate = moment()
     else
       endDate = moment(end.date)
-    endDate.add(1, 'days').hour(10)
+    endDate.add(1, 'days').hour(dailyHour)
     if start?
-      startDate = moment(start.date).add(1, 'days').hour(10)
+      startDate = moment(start.date).add(1, 'days').hour(dailyHour)
     donePoints = 0
     for card in doneCards
       if card.movedDate
@@ -36,7 +37,7 @@ angular.module '%module%.scrumboard'
     return if moment(today).isBefore moment(day.date).add(1, 'days')
     value
 
-  generateData = (cards, days, resources, dayPlusOne) ->
+  generateData = (cards, days, resources, dayPlusOne, dailyHour) ->
     return unless cards and days and resources
     data = []
     ideal = resources.speed * resources.totalManDays
@@ -55,7 +56,7 @@ angular.module '%module%.scrumboard'
     previousDay = undefined
     for day, i in days
       manDays = _.reduce resources.matrix[i], (s, n) -> s + n
-      donePoints = getDoneBetweenDays cards, days[i - 1], day, (i >= days.length - 1)
+      donePoints = getDoneBetweenDays cards, days[i - 1], day, (i >= days.length - 1), dailyHour
       ideal = ideal - resources.speed * manDays
       doneToday += donePoints
       diff = ideal - (resources.totalPoints - doneToday)

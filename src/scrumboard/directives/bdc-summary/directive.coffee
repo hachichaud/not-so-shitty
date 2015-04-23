@@ -3,4 +3,5 @@ angular.module '%module%.scrumboard'
   restrict: 'AE'
   scope:
     resources: '='
+    label: '='
   templateUrl: 'scrumboard/directives/bdc-summary/view.html'

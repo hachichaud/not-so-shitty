@@ -7,12 +7,32 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
   layout-fill
   layout-align="center center"
 )
-  md-button.md-fab.md-hue-3.main-button(
-    aria-label="Setup"
-    md-theme="blue"
-    ng-click="openActions()"
-  )
-    i.fa.fa-cog
+  .action-buttons
+    md-button.md-fab.md-mini.md-primary.md-hue-1.secondary-button(
+      aria-label="Send Daily"
+      ng-if="showAllActions"
+    ) 
+      .daily(
+        daily-report
+        data="bdcData"
+        daily-column-id="setup.columnIds.done"
+      )
+        .md-icon-container
+          i.fa.fa-trello
+    md-button.md-fab.md-mini.md-accent.secondary-button(
+      aria-label="Setup"
+      ui-sref="setup"
+      ng-if="showAllActions"
+    ) 
+      .md-icon-container
+        i.fa.fa-cogs
+    md-button.md-fab.md-hue-3(
+      aria-label="Setup"
+      md-theme="blue"
+      ng-click="openActions()"
+    )
+      md-icon(md-svg-src="batman.svg", aria-label="do something")
+
   .burndown(
     flex
     layout="column"
@@ -21,7 +41,7 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
     .md-whiteframe-z2.scrumboard-section
       md-toolbar
         .md-toolbar-tools
-          span(bdc-summary, resources="setup.resources")
+          span(bdc-summary, resources="setup.resources", label="setup.sprintLabel")
       .widgets(
         layout-gt-lg="row"
         layout="column"
@@ -40,14 +60,3 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
           print-table(
             data="bdcData"
           )
-          .actions
-            md-button.md-fab.md-primary.md-hue-3
-              div(
-                daily-report
-                data="bdcData"
-                daily-column-id="setup.columnIds.done"
-              )
-                i.fa.fa-trello
-            md-button(
-              ng-click="toggleDayPlusOne()"
-            ) J + 1
