@@ -8,10 +8,10 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
   layout-align="center center"
 )
   .action-buttons
-    md-button.md-fab.md-mini.md-primary.md-hue-1.secondary-button(
+    md-button.md-fab.md-mini.md-accent.md-hue-2.secondary-button(
       aria-label="Send Daily"
       ng-if="showAllActions"
-    ) 
+    )
       .daily(
         daily-report
         data="bdcData"
@@ -19,6 +19,15 @@ md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
       )
         .md-icon-container
           i.fa.fa-trello
+    md-button.md-fab.md-mini.md-primary.md-hue-1.secondary-button(
+      aria-label="j+1"
+      ng-if="showAllActions"
+      ng-click="toggleDayPlusOne()"
+    ) 
+      .md-icon-container(ng-if="!showDayPlusOne")
+        i.fa.fa-fast-forward
+      .md-icon-container(ng-if="showDayPlusOne")
+        i.fa.fa-fast-backward
     md-button.md-fab.md-mini.md-accent.secondary-button(
       aria-label="Setup"
       ui-sref="setup"
