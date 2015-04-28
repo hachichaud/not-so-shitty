@@ -89,8 +89,8 @@ angular.module '%module%.scrumboard'
 
     canvas = document.createElement 'canvas'
     document.body.appendChild canvas
-    width = 400
-    height = 200
+    width = 1170
+    height = 827
     canvas.width = width
     canvas.height = height
     canvas.getContext '2d'
