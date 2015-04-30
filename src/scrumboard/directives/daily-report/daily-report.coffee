@@ -93,8 +93,10 @@ angular.module '%module%.scrumboard'
     height = 827
     canvas.width = width
     canvas.height = height
-    canvas.getContext '2d'
-    .drawImage img,0,0,width,height
+    ctx = canvas.getContext '2d'
+    ctx.fillStyle = 'white'
+    ctx.fillRect 0, 0, width, height
+    ctx.drawImage img, 0, 0, width, height
     dataurl = canvas.toDataURL 'image/png'
 
     blob = dataURItoBlob dataurl
