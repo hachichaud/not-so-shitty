@@ -3,7 +3,7 @@ angular.module '%module%.setup'
   $stateProvider
   .state 'setup',
     url: '/setup'
-    templateUrl: 'setup/views/setup.html'
+    templateUrl: 'setup/views/setup2.html'
     controller: 'SetupCtrl'
     resolve:
       boards: (Setup) -> Setup.getBoards()

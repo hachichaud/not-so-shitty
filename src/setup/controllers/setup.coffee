@@ -15,3 +15,6 @@ angular.module '%module%.setup'
     Setup.getBoardMembers next
     .then (boardMembers) ->
       $scope.boardMembers = boardMembers
+
+  $scope.showWidget = (widgetName) ->
+    $scope.currentWidget = widgetName
