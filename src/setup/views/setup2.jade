@@ -1,0 +1,140 @@
+md-toolbar.page-header.md-whiteframe-z1.md-hue-3.md-primary
+  .md-toolbar-tools
+    h1 Setup
+
+.container(
+  layout="column"
+  layout-gt-lg="row"
+  layout-fill
+  layout-margin
+  layout-align="center center"
+)
+  md-button.md-fab.md-hue-3.main-button(
+    aria-label="Setup"
+    md-theme="blue"
+    ui-sref="scrumboard"
+  )
+    i.fa.fa-line-chart
+  .md-whiteframe-z1(flex)
+    md-content
+      div
+        span This is the setup page for 
+        span
+          md-select(
+            ng-model="setup.boardId"
+          )
+            md-option(
+              value="{{board.id}}"
+              ng-repeat="board in boards"
+            ) {{board.name}}
+        span project's burndown chart
+      div
+        span The team is made up of
+        span(ng-click="showWidget('teambuilder')")
+          span(ng-repeat="devId in setup.team.dev")
+            trello-avatar(
+              member-id="{{devId}}"
+            )
+        span , and we meet at _10_ oclock for our daily standup meeting.
+      p For this _1st_ sprint, which will take place from _start_ to _end_, our goal is _TO KICK ASS_ !
+      p We we will have _10_ man-days to produce _123_ feature points, with a speed of _12.3_
+
+  .md-whiteframe-z1(flex)
+    md-content(ng-switch="currentWidget")
+      h4 widget
+      team-builder-widget(
+        board-members="boardMembers"
+        team="setup.team"
+        ng-switch-when="teambuilder"
+      )
+  
+//
+  .container(
+    layout="column"
+    layout-fill
+    layout-align="center center"
+  )
+    md-button.md-fab.md-hue-3.main-button(
+      aria-label="Setup"
+      md-theme="blue"
+      ui-sref="scrumboard"
+    )
+      i.fa.fa-line-chart
+
+    .setup(
+      flex
+      layout="column"
+      layout-gt-md="row"
+    )
+      div(
+        layout-fill
+        layout="column"
+      )
+        md-toolbar.md-hue-2
+          .md-toolbar-tools
+            h4 Board
+        md-content.md-padding.md-whiteframe-z2
+          select-board(
+            boards="boards"
+            board-id="setup.boardId"
+          )
+        md-toolbar.md-accent
+          .md-toolbar-tools
+            h4 Columns
+        md-content.md-padding.md-whiteframe-z2
+          select-columns(
+            board-columns="boardColumns"
+            column-ids="setup.columnIds"
+          )
+        md-toolbar.md-hue-2
+          .md-toolbar-tools
+            h4 Save setup
+        md-content.md-padding.md-whiteframe-z2(
+          md-theme="blue"
+        )
+          h4 Save to trello card
+          select-card(
+            columns="boardColumns"
+            card-id="setup.saveCardId"
+          )
+          save-to-trello(
+            card-id="setup.saveCardId"
+            data="setup"
+          )
+      div(
+        layout-fill
+        layout="column"
+      )
+        md-toolbar.md-accent.md-hue-2
+          .md-toolbar-tools
+            h4 Resources
+        md-content.md-whiteframe-z2
+          resources-widget(
+            board-members="boardMembers"
+            team="setup.team"
+            dates="setup.dates"
+            resources="setup.resources"
+          )
+        md-toolbar.md-primary.md-hue-1
+          .md-toolbar-tools
+            h4 Optional
+        md-content.md-whiteframe-z2
+          md-content(
+            layout="column"
+            layout-gt-lg="row"
+          )
+            label(flex)
+              span Sprint Label
+              input(
+                type="text"
+                ng-model="setup.sprintLabel"
+              )
+            label(flex)
+              span Daily Scrum Hour [1-24]
+              input(
+                type="number"
+                ng-model="setup.dailyHour"
+                min="1"
+                max="24"
+                step="1"
+              )

@@ -1,0 +1,36 @@
+md-content.team-composition.md-padding
+  .section-title Who are your team members
+  md-card(
+    layout="row"
+  )
+    .dev(flex)
+      trello-avatar(
+        ng-repeat="id in team.dev"
+        member-id="{{id}}"
+      )
+    .rest(flex)
+      trello-avatar(
+        ng-repeat="id in team.rest"
+        member-id="{{id}}"
+      )
+  md-button.md-accent(
+    ng-click="clearTeam()"
+  ) 
+    span
+      i.fa.fa-trash
+    span  Clear
+  .select-teams(
+    layout="row"
+  )
+    .select-dev-team(flex)
+      div Select the dev team
+      select-people(
+        members="boardMembers"
+        selected-members="team.dev"
+      )
+    .select-rest-team(flex) 
+      div Select the rest of the team
+      select-people(
+        members="boardMembers"
+        selected-members="team.rest"
+      )
